@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebius77\weeklyCalendarGeneration\App;
+namespace Sebius77\WeeklyCalendarGeneration\App;
 
 class EdtDay {
 

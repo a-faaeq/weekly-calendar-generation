@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "sebius77\\weekly-calendar-generation\\": ""
+      "sebius77\\weeklyCalendarGeneration\\": ""
     },
     "extra": {
       "branch-alias": {

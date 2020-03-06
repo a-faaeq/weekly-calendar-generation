@@ -10,9 +10,12 @@
       "email": "gebs.dev@gmail.com"
     }
   ],
+  "require": {
+    "php": ">7.1.0"
+  },
   "autoload": {
-    "psr-4": {
-      "sebius77\\weeklyCalendarGeneration\\": ""
+    "psr-0": {
+      "Sebius77\\WeeklyCalendarGeneration\\": "src"
     },
     "extra": {
       "branch-alias": {

@@ -1,8 +1,8 @@
 {
-  "name": "sebius77/WeeklyCalendarGeneration",
+  "name": "sebius77/weekly-calendar-generation",
   "description": "library for generating a weekly calendar",
   "keywords": ["calendar", "weekly"],
-  "homepage": "https://github.com/sebius77/WeeklyCalendarGeneration",
+  "homepage": "https://github.com/sebius77/weekly-calendar-generation",
   "license": "CECILL-C",
   "authors": [
     {

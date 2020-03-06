@@ -1,0 +1,57 @@
+.title {
+    height: 20px;
+    border: 1px solid;
+    margin: 1px;
+    width: 300px;
+}
+
+.table-center {
+    display: flex;
+    justify-content: center;
+}
+
+.day {
+    border: 1px solid;
+}
+
+.cell {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid transparent;
+    width: 300px;
+    height: 15px;
+    margin: 1px;
+}
+
+#hours {
+    margin-top: 34px;
+    text-align: end;
+    border: 0;
+}
+
+.hour {
+    z-index: 2;
+    border: 1px solid transparent;
+    width: 200px;
+    height: 15px;
+    margin: 1px;
+    padding-right: 2px;
+}
+
+.seance {
+
+    background-color: white;
+    border: 1px solid;
+    margin-right: 1px;
+    border-radius: 1%;
+}
+
+.groupSeance {
+    display: flex;
+    padding-left: 1px;
+}
+
+.seance-title {
+    padding: 1px;
+
+}
+

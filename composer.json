@@ -1,0 +1,23 @@
+{
+  "name": "sebius77/WeeklyCalendarGeneration",
+  "description": "library for generating a weekly calendar",
+  "keywords": ["calendar", "weekly"],
+  "homepage": "https://github.com/sebius77/WeeklyCalendarGeneration",
+  "license": "CECILL-C",
+  "authors": [
+    {
+      "name": "Sébastien Gaudin",
+      "email": "gebs.dev@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Sebius77\\WeeklycalendarGeneration\\": ""
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.0-dev"
+      }
+    }
+  }
+}

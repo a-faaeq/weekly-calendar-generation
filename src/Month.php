@@ -2,7 +2,7 @@
 
 namespace Sebius77\WeeklyCalendarGeneration\App;
 
-class DateService {
+class Month {
 
     private $months = [
         'janvier',

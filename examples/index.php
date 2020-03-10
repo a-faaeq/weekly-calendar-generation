@@ -12,8 +12,8 @@
 
 <?php
 
-    require 'src/EdtDay.php';
-    require 'src/Session.php';
+    require 'cal/EdtDay.php';
+    require 'cal/Session.php';
 
     // Heure début
     $start = 8*60;

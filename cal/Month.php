@@ -1,6 +1,6 @@
 <?php
 
-namespace Sebius77\WeeklyCalendarGeneration\App;
+namespace Sebius77\WeeklyCalendarGeneration\cal;
 
 class Month {
 

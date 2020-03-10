@@ -14,8 +14,9 @@
     "php": ">=7.1.0"
   },
   "autoload": {
-    "psr-0": {
-      "WeeklyCalendarGeneration\\": "src"
-    }
+    "psr-4": { "Sebius77\\WeeklyCalendarGeneration\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
   }
 }

@@ -12,8 +12,8 @@
 
 <?php
 
-    require 'cal/EdtDay.php';
-    require 'cal/Session.php';
+    require '../cal/EdtDay.php';
+    require '../cal/Session.php';
 
     // Heure début
     $start = 8*60;
@@ -52,7 +52,7 @@
     '2020-2-25-17-60-H',
     ];
 
-   $edt = New \Sebius77\WeeklyCalendarGeneration\App\EdtDay(8, 19);
+   $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
 
    // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
    $userSessions = $edt->sessionTable($user1, '2020-2-24');
@@ -65,7 +65,7 @@
     $userSession2 = $edt->sessionTable($jour2, '2020-2-25');
     $result2 = $edt->bundleSession($userSession2);
     */
-    include('examples/weekCal.php');
+    include('weekCal.php');
 ?>
 
 

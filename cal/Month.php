@@ -18,6 +18,15 @@ class Month {
         'novembre',
         'décembre'
     ];
+    private $days = [
+      'Lundi',
+      'Mardi',
+      'Mercredi',
+      'Jeudi',
+      'Vendredi',
+      'Samedi',
+      'Dimanche'
+    ];
     private $month;
     private $year;
     private $week;
@@ -29,7 +38,7 @@ class Month {
      * @param int $year L'année
      * @param int $week le numéro de semaine
      */
-    public function __construct(int $month, int $year, int $week)
+    public function __construct(int $month, int $year, int $week = null)
     {
         if ($month < 0 || $month > 12) {
             throw new \Exception(" Le mois $month n'est pas valide");
@@ -42,9 +51,11 @@ class Month {
         $this->setMonth($month);
         $this->setYear($year);
 
-        //TODO : Attention si un mois est donné, il faut que la semaine correspond au mois.
-        // TODO : Il y a des vérifications à effectuer et peut-être griser le champ
-        $this->setWeek($week);
+        if (!is_null($week)) {
+            $this->setWeek($week);
+        } else {
+            $this->setWeek($this->getFirstWeek());
+        }
     }
 
     /**
@@ -102,7 +113,7 @@ class Month {
      */
     public function startDateWeek($week) {
         if ($week > 1) {
-            $dateWeek = (clone $this->startYearDay())->modify(" +{$this->getFirstWeek()} week ");
+            $dateWeek = (clone $this->startYearDay())->modify("+" . ($this->getFirstWeek() - 1) . " week");
         } else {
             $dateWeek = $this->startYearDay();
         }
@@ -173,13 +184,36 @@ class Month {
     }
 
     /**
-     * @return mixed
+     * @return string
      * @throws \Exception
      */
-    public function test()
+    public function miniCal()
     {
-        $firstDay =  new \DateTime("{$this->year}-01-01");
-        return $firstDay->format('w');
+        $string = '';
+        $weeksNumber = $this->getWeeks();
+        $days = $this->getDays();
+        $firstWeek = $this->getFirstWeek();
+        $firstDayOfWeek = $this->startDateWeek($firstWeek);
+
+
+        $string .= '<tr>';
+        for ($i = 0; $i < $weeksNumber; $i++) {
+            foreach ($days as $k=>$day) {
+                $date = (clone $firstDayOfWeek)->modify("+" . ($k + $i * 7) . " day");
+
+                if (intval($date->format('m')) !== $this->getMonth()) {
+                    $string .= '<td style="color: gray;">' . $date->format('d') . '</td>';
+                } else {
+                    $string .= '<td>' . $date->format('d') . '</td>';
+                }
+
+
+                if ($k === 6) {
+                    $string .= '</tr><tr>';
+                }
+            }
+        }
+        return $string;
     }
 
     /**
@@ -244,5 +278,13 @@ class Month {
     public function setWeek($week): void
     {
         $this->week = $week;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDays(): array
+    {
+        return $this->days;
     }
 }

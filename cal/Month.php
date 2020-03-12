@@ -80,9 +80,20 @@ class Month {
         $start = $this->startMonthDay();
         $end = $this->endMonthDay();
 
-        $weeks = intval($end->format('W')) - intval($start->format('W')) + 1;
+
+        var_dump(intval($end->format('W')));
+
+        if (intval($end->format('W')) === 1) {
+            $end->modify('- 1 week');
+            $weekEnd = intval($end->format('W')) + 1;
+        } else {
+            $weekEnd = intval($end->format('W'));
+        }
+
+        $weeks = $weekEnd - intval($start->format('W')) + 1;
+        var_dump($weeks);
         if ($weeks < 0) {
-            $weeks = intval($end->format('W'));
+            $weeks = intval($end->format('W')) + 1;
         }
         return $weeks;
     }
@@ -209,7 +220,8 @@ class Month {
                 }
 
                 if ($k === 6) {
-                    $string .= '</tr><tr id="week-' . ($firstWeek + 1) . '">';
+                    $cloneDate = clone($date->modify('+ 1 week'));
+                    $string .= '</tr><tr id="week-' . ($cloneDate->format('W')). '">';
                 }
             }
         }

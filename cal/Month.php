@@ -79,10 +79,11 @@ class Month {
     {
         $start = $this->startMonthDay();
         $end = $this->endMonthDay();
-        
+        $cloneEnd = clone ($end);
+
         if (intval($end->format('W')) === 1) {
-            $end->modify('- 1 week');
-            $weekEnd = intval($end->format('W')) + 1;
+            $cloneEnd->modify('- 1 week');
+            $weekEnd = intval($cloneEnd->format('W')) + 1;
         } else {
             $weekEnd = intval($end->format('W'));
         }
@@ -92,6 +93,7 @@ class Month {
         if ($weeks < 0) {
             $weeks = intval($end->format('W')) + 1;
         }
+
         return $weeks;
     }
 
@@ -114,24 +116,16 @@ class Month {
     }
 
     /**
-     * Permet d'obtenir la date du premier jour d'une semaine donnée.
-     * @param $week
+     * @param \DateTime $date
      * @return \DateTime
-     * @throws \Exception
      */
-    public function startDateWeek($week) {
-        if ($week > 1) {
-            $dateWeek = (clone $this->startYearDay())->modify("+" . ($this->getFirstWeek() - 1) . " week");
-        } else {
-            $dateWeek = $this->startYearDay();
+    public function lastMonday(\DateTime $date)
+    {
+        if ($date->format('w') !== "1") {
+            $date = clone($date)->modify('last monday');
         }
 
-        $numberDay = $dateWeek->format('w');
-        if ($numberDay !== 1) {
-            $dateWeek->modify('last monday');
-        }
-
-        return $dateWeek;
+        return $date;
     }
 
     /**
@@ -201,14 +195,14 @@ class Month {
         $weeksNumber = $this->getWeeks();
         $days = $this->getDays();
         $firstWeek = $this->getFirstWeek();
-        $firstDayOfWeek = $this->startDateWeek($firstWeek);
+        $monday = $this->lastMonday($this->startMonthDay());
 
         $string .='<tr><th>LUN</th><th>MAR</th><th>MER</th><th>JEU</th><th>VEN</th><th>SAM</th><th>DIM</th></tr>';
 
         $string .= '<tr id="week-' . $firstWeek . '">';
         for ($i = 0; $i < $weeksNumber; $i++) {
             foreach ($days as $k=>$day) {
-                $date = (clone $firstDayOfWeek)->modify("+" . ($k + $i * 7) . " day");
+                $date = (clone $monday)->modify("+" . ($k + $i * 7) . " day");
 
                 if (intval($date->format('m')) !== $this->getMonth()) {
                     $string .= '<td style="color: gray;">' . $date->format('d') . '</td>';

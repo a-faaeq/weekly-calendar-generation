@@ -15,7 +15,7 @@
 require '../cal/Month.php';
 
 
-$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(12, 2019);
+$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(12, 2021);
 
 //var_dump($month->getMonth());
 //var_dump($month->startMonthDay());

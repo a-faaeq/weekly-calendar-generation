@@ -195,8 +195,9 @@ class Month {
         $firstWeek = $this->getFirstWeek();
         $firstDayOfWeek = $this->startDateWeek($firstWeek);
 
+        $string .='<tr><th>LUN</th><th>MAR</th><th>MER</th><th>JEU</th><th>VEN</th><th>SAM</th><th>DIM</th></tr>';
 
-        $string .= '<tr>';
+        $string .= '<tr id="week-' . $firstWeek . '">';
         for ($i = 0; $i < $weeksNumber; $i++) {
             foreach ($days as $k=>$day) {
                 $date = (clone $firstDayOfWeek)->modify("+" . ($k + $i * 7) . " day");
@@ -204,12 +205,11 @@ class Month {
                 if (intval($date->format('m')) !== $this->getMonth()) {
                     $string .= '<td style="color: gray;">' . $date->format('d') . '</td>';
                 } else {
-                    $string .= '<td>' . $date->format('d') . '</td>';
+                    $string .= '<td id="day-' . $date->format('d') . '">' . $date->format('d') . '</td>';
                 }
 
-
                 if ($k === 6) {
-                    $string .= '</tr><tr>';
+                    $string .= '</tr><tr id="week-' . ($firstWeek + 1) . '">';
                 }
             }
         }

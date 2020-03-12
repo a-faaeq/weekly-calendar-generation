@@ -79,10 +79,7 @@ class Month {
     {
         $start = $this->startMonthDay();
         $end = $this->endMonthDay();
-
-
-        var_dump(intval($end->format('W')));
-
+        
         if (intval($end->format('W')) === 1) {
             $end->modify('- 1 week');
             $weekEnd = intval($end->format('W')) + 1;
@@ -91,7 +88,7 @@ class Month {
         }
 
         $weeks = $weekEnd - intval($start->format('W')) + 1;
-        var_dump($weeks);
+
         if ($weeks < 0) {
             $weeks = intval($end->format('W')) + 1;
         }

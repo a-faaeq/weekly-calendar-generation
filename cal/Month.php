@@ -77,10 +77,11 @@ class Month {
      */
     public function getWeeks(): int
     {
-        $start = $this->startMonthDay();
-        $end = $this->endMonthDay();
+        $start = $this->startMonthDay(); // Date du 1er jour du mois
+        $end = $this->endMonthDay(); // Date du dernier jour du mois
         $cloneEnd = clone ($end);
 
+        // Dans le cas ou la date de fin serait contenu dans la 1ère semaine de l'année
         if (intval($end->format('W')) === 1) {
             $cloneEnd->modify('- 1 week');
             $weekEnd = intval($cloneEnd->format('W')) + 1;
@@ -124,8 +125,31 @@ class Month {
         if ($date->format('w') !== "1") {
             $date = clone($date)->modify('last monday');
         }
-
         return $date;
+    }
+
+    /**
+     * Permet de récupérer le lundi d'une semaine donnée
+     * @param $week
+     * @return \DateTime
+     * @throws \Exception
+     */
+    public function mondayOfWeek($week)
+    {
+        $firstDateYear = $this->startYearDay();
+        $day = $firstDateYear->format('w');
+
+        if ($day !== "1") {
+            $firstDateYear->modify(' last monday');
+        }
+
+        if (intval($firstDateYear->format('W')) === 1) {
+            $firstDateYear->modify('+'. ($week - 1) . ' week');
+        } else {
+            $firstDateYear->modify('+'. ($week) . ' week');
+        }
+
+        return $firstDateYear;
     }
 
     /**

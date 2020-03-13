@@ -15,13 +15,11 @@
 require '../cal/Month.php';
 
 
-$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(12, 2021);
+$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(3, 2020);
 
-//var_dump($month->getMonth());
-//var_dump($month->startMonthDay());
 $month->getWeeks();
 
-
+var_dump($month->mondayOfWeek(34));
 
 
 $minical = $month->miniCal();

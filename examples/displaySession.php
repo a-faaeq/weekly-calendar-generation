@@ -59,17 +59,13 @@
 
    // ensuite on regroupe les sessions liées
     $result = $edt->bundleSession($userSessions);
-
-
+    
     /*
     $userSession2 = $edt->sessionTable($jour2, '2020-2-25');
     $result2 = $edt->bundleSession($userSession2);
     */
     include('weekCal.php');
 ?>
-
-
-
 
 </body>
 </html>

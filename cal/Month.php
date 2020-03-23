@@ -38,7 +38,7 @@ class Month {
      * @param int $year L'année
      * @param int $week le numéro de semaine
      */
-    public function __construct(int $month, int $year, int $week = null)
+    public function __construct(int $year, int $month, int $week = null)
     {
         if ($month < 0 || $month > 12) {
             throw new \Exception(" Le mois $month n'est pas valide");
@@ -46,6 +46,12 @@ class Month {
 
         if ($year < 1970) {
             throw new \Exception("L'année est inférieur à 1970");
+        }
+
+        if (!is_null($week)) {
+            if ($week < 1 || $week > 54 ) {
+                throw new \Exception("Le nombre de semaine indiqué est erroné");
+            }
         }
 
         $this->setMonth($month);
@@ -169,44 +175,6 @@ class Month {
     public function getFirstWeek() : int
     {
         return $this->startMonthDay()->format('W');
-    }
-
-    public function generateWeekTab(\DateTime $monday, $user = null, $group = null, $room = null): array
-    {
-        $daysWeek = [
-            'lundi' => [
-                'day' => $monday->format('d'),
-                'month' => $monday->format('m'),
-                'data' => []
-            ],
-            'mardi' => [
-                'day' => (clone $monday)->modify('+ 1 day')->format('d'),
-                'month' => (clone $monday)->modify('+ 1 day')->format('m'),
-                'data' => []
-            ],
-            'mercredi' => [
-                'day' => (clone $monday)->modify('+ 2 day')->format('d'),
-                'month' => (clone $monday)->modify('+ 2 day')->format('m'),
-                'data' => []
-            ],
-            'jeudi' => [
-                'day' => (clone $monday)->modify('+ 3 day')->format('d'),
-                'month' => (clone $monday)->modify('+ 3 day')->format('m'),
-                'data' => []
-            ],
-            'vendredi' => [
-                'day' => (clone $monday)->modify('+ 4 day')->format('d'),
-                'month' => (clone $monday)->modify('+ 4 day')->format('m'),
-                'data' => []
-            ],
-            'samedi' => [
-                'day' => (clone $monday)->modify('+ 5 day')->format('d'),
-                'month' => (clone $monday)->modify('+ 5 day')->format('m'),
-                'data' => []
-            ],
-        ];
-
-        return $daysWeek;
     }
 
     /**

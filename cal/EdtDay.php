@@ -186,10 +186,8 @@ class EdtDay {
                       }
                   }
             }
-
             $str .= '</div>';
             $i += 15;
-
         }
         return $str;
     }

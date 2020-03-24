@@ -42,18 +42,30 @@ class EdtDay {
     }
 
     /**
+     * @param array $data
+     * @return array
+     */
+    public function sessions(array $data) {
+        $sessions = [];
+        foreach ($data as $session) {
+            $object = new Session($session);
+            $sessions[] = $object;
+        }
+        return $sessions;
+    }
+
+    /**
      * Permet de regrouper les séances du jour demandé dans un tableau
-     * @param $data
+     * @param $sessions
      * @param $day
      * @return array
      */
-    public function sessionTable(array $data, $day)
+    public function sessionTable(array $sessions, $day)
     {
         $sessionTable = [];
         // On parcourt le tableau utilisateur pour récupérer uniquement les séances correspondant au jour donné
-        foreach ($data as $field) {
-            $session = new Session($field, $day);
-            if ($day === $session->getSessionDay()) {
+        foreach ($sessions as $session) {
+            if ($day === $session->getSessionDate()) {
                 $sessionTable[] = $session;
             }
         }
@@ -104,7 +116,7 @@ class EdtDay {
                 }
             }
 
-            // 2ème vérification
+            // 2ème vérification : On compare de nouveau sauf dans le cas ou nous avons déjà effectué une comparaison
             if (isset($result[$i])) {
                 foreach ($result[$i] as $tab) {
                     foreach ($tab as $object) {
@@ -137,22 +149,26 @@ class EdtDay {
      */
     public function buildDay(array $day, array $options = null)
     {
+        // On tri les sessions dans l'ordre chronologique
         $day = $this->sortSessionByHour($day);
         $str = '';
+        // $i est l'heure de début d'une journée
         $i = $this->getStartTimeDay();
 
+        // Tant que l'heure de fin n'est pas atteinte on continue le traitement des sessions
         while ($i < $this->getEndTimeDay()) {
             $str .= '<div class="cell">';
             foreach ($day as $groupSeance) {
 
                   if ($i === $groupSeance['firstHour'] ) {
-                      $diff = $groupSeance['lastHour'] - $groupSeance['firstHour'];
+                     // $diff = $groupSeance['lastHour'] - $groupSeance['firstHour'];
 
                       $sessionsNumber = count($groupSeance['sessions']);
                       $firstHour = $groupSeance['firstHour'];
 
                       $indexSession = 0;
 
+                      // Dans le cas ou il y aurait plus d'une session sur le même créneau
                       if ($sessionsNumber > 1) {
                           $percent = 100 / $sessionsNumber;
                           $str .='<div class="groupSeance">';

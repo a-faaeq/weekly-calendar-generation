@@ -29,6 +29,7 @@
     // XX -> Heure de début [3]
     // xxxx -> Durée de la séance en minute [4]
     // xxxxxxxx -> Type du cours [5]
+/*
       $user1 = [
           '2020-2-24-08-60-A',
           '2020-2-24-10-60-B',
@@ -51,20 +52,61 @@
     '2020-2-25-16-60-G',
     '2020-2-25-17-60-H',
     ];
+*/
+
+
+// Filtre 1 : codeProf
+$filtre1 = [
+    [
+        0 => 1233443,
+        1 => '2020-03-23',
+        2 => '08',
+        3 => '60', // 130 signifie 1h30
+        4 => 'TD',
+        5 => 'Mathematiques',
+        6 => 'Toto',
+        7 => 'R10'
+    ],
+    [
+        0 => 1233443,
+        1 => '2020-03-23',
+        2 => '09',
+        3 => '200', // 130 signifie 1h30
+        4 => 'TD',
+        5 => 'Mathematiques',
+        6 => 'Toto',
+        7 => 'R08'
+    ],
+    [
+        0 => 1233443,
+        1 => '2020-03-24',
+        2 => '08',
+        3 => '130', // 130 signifie 1h30
+        4 => 'TD',
+        5 => 'Mathematiques',
+        6 => 'Donald',
+        7 => 'R12'
+    ],
+];
 
    $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
 
    // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
-   $userSessions = $edt->sessionTable($user1, '2020-2-24');
+
+    $sessions = $edt->sessions($filtre1);
+
+   $userSessions = $edt->sessionTable($sessions, '2020-03-23');
 
    // ensuite on regroupe les sessions liées
     $result = $edt->bundleSession($userSessions);
-    
+
     /*
     $userSession2 = $edt->sessionTable($jour2, '2020-2-25');
     $result2 = $edt->bundleSession($userSession2);
     */
     include('weekCal.php');
+
+
 ?>
 
 </body>

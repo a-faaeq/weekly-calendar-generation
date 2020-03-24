@@ -43,7 +43,22 @@ class Session {
      */
     public function setSessionStartTime($sessionStartTime)
     {
-        $this->sessionStartTime = intval($sessionStartTime) * 60;
+        $sessionStartTime = intval($sessionStartTime);
+        $nb = strlen($sessionStartTime);
+
+        if ($nb <= 2) {
+            $this->sessionStartTime = $sessionStartTime;
+        } elseif ($nb === 3) {
+            $tmp = str_split($sessionStartTime);
+            $hours = intval($tmp[0]);
+            $min = intval($tmp[1] . $tmp[2]);
+            $this->sessionStartTime = ($hours * 60) + $min;
+        } elseif ($nb === 4) {
+            $tmp = str_split($sessionStartTime);
+            $hours = intval($tmp[0] . $tmp[1]);
+            $min = intval($tmp[2] . $tmp[3]);
+            $this->sessionStartTime = ($hours * 60) + $min;
+        }
     }
 
     /**

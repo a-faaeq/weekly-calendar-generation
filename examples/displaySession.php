@@ -60,40 +60,53 @@ $filtre1 = [
     [
         0 => 1233443,
         1 => '2020-03-23',
-        2 => '08',
+        2 => '800',
         3 => '60', // 130 signifie 1h30
         4 => 'TD',
         5 => 'Mathematiques',
         6 => 'Toto',
-        7 => 'R10'
+        7 => 'R10',
+        8 => []
     ],
     [
         0 => 1233443,
         1 => '2020-03-23',
-        2 => '09',
+        2 => '900',
         3 => '200', // 130 signifie 1h30
         4 => 'TD',
         5 => 'Mathematiques',
         6 => 'Toto',
-        7 => 'R08'
+        7 => 'R08',
+        8 => []
     ],
     [
         0 => 1233443,
         1 => '2020-03-24',
-        2 => '08',
+        2 => '800',
         3 => '130', // 130 signifie 1h30
         4 => 'TD',
         5 => 'Mathematiques',
         6 => 'Donald',
-        7 => 'R12'
+        7 => 'R12',
+        8 => []
     ],
+];
+
+$colors = [
+    'COURS' => '#B5A9FB',
+    'TD' => '#F9FDA8',
+    'TP' => '#A9FCAE',
+    'DS' => '#FDA9A9',
+    'Projet' => '#FFC800',
+    'Autre' => '#1EFF1D',
+    'Reservation' => '#FFFF01'
 ];
 
    $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
 
    // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
 
-    $sessions = $edt->sessions($filtre1);
+    $sessions = $edt->sessions($filtre1, $colors);
 
    $userSessions = $edt->sessionTable($sessions, '2020-03-23');
 

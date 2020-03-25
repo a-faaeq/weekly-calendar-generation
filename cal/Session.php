@@ -15,9 +15,9 @@ class Session {
     private $sessionRoom; // Salle
     private $sessionGroups;
     private $previousSession;
+    private $color;
 
-
-    public function __construct($data)
+    public function __construct($data, $colors)
     {
         $this->setSessionCode($data[0]);
         $this->setSessionDate($data[1]);
@@ -28,6 +28,7 @@ class Session {
         $this->setSessionTeacher($data[6]);
         $this->setSessionRoom(($data[7]));
         $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
+        $this->setColor($colors);
     }
 
     /**
@@ -233,6 +234,29 @@ class Session {
      */
     public function setSessionGroups($sessionGroups): void
     {
-        $this->sessionGroups = $sessionGroups;
+        $this->sessionGroups[] = $sessionGroups;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param mixed $colors
+     */
+    public function setColor(array $colors): void
+    {
+        $type = $this->getSessionType();
+
+        foreach ($colors as $key=>$color)
+        {
+            if ($key === $type) {
+                $this->color = $color;
+            }
+        }
     }
 }

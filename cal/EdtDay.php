@@ -43,12 +43,13 @@ class EdtDay {
 
     /**
      * @param array $data
+     * @param array $colors
      * @return array
      */
-    public function sessions(array $data) {
+    public function sessions(array $data, array $colors) {
         $sessions = [];
         foreach ($data as $session) {
-            $object = new Session($session);
+            $object = new Session($session, $colors);
             $sessions[] = $object;
         }
         return $sessions;
@@ -147,7 +148,14 @@ class EdtDay {
      * @param array $options
      * @return string
      */
-    public function buildDay(array $day, array $options = null)
+    public function buildDay(
+        array $day,
+        array $options = [
+            'cellClass' => null,
+            'seanceClass' => null,
+            'seanceTitleClass' => null,
+
+        ])
     {
         // On tri les sessions dans l'ordre chronologique
         $day = $this->sortSessionByHour($day);
@@ -157,21 +165,24 @@ class EdtDay {
 
         // Tant que l'heure de fin n'est pas atteinte on continue le traitement des sessions
         while ($i < $this->getEndTimeDay()) {
-            $str .= '<div class="cell">';
+            // On initialise la cellule
+            $str .= '<div class="'. $options['cellClass'] .'">';
+
             foreach ($day as $groupSeance) {
-
+                // Dans le cas ou l'heure de debut correspond à l'heure de début de la cellule
                   if ($i === $groupSeance['firstHour'] ) {
-                     // $diff = $groupSeance['lastHour'] - $groupSeance['firstHour'];
-
+                      // On compte le nombre de séance qui se chevauche
                       $sessionsNumber = count($groupSeance['sessions']);
+                      // On récupérè l'heure de début
                       $firstHour = $groupSeance['firstHour'];
 
+                      // On initialise un index des séances regroupés
                       $indexSession = 0;
 
                       // Dans le cas ou il y aurait plus d'une session sur le même créneau
                       if ($sessionsNumber > 1) {
                           $percent = 100 / $sessionsNumber;
-                          $str .='<div class="groupSeance">';
+                          $str .='<div class="'. $options['seanceClass'] .'">';
                           foreach($groupSeance['sessions'] as $seance) {
                               $indexSession += 1;
                               $coefficient = $seance->getSessionLength() / 15;
@@ -184,10 +195,23 @@ class EdtDay {
                                   $top = $distance + ($newCoefficient*3);
                               }
 
-                              $str .= '<div class="seance" style="width: '. $percent . '%; height: '
+                              $str .= '<div class="'. $options['seanceClass'] .'" style="width: '. $percent . '%; height: '
                                   . ($length) . 'px; position: relative; top: ' . $top . 'px;">';
 
-                              $str .= '<div class="seance-title" style="position: relative; background-color: #1fff25;">' . $seance->getSessionType() . '</div>';
+                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '
+                                  . $seance->getColor() .';">'
+                                  . '<span>' . $seance->getSessionType() . '</span>'
+                                  . '<span>' . $seance->getSessionStartTime() .'</span>-'
+                                  . '<span>' . $seance->getSessionEndTime() .'</span>'
+                                  . '</div>'
+
+                                . '<div>'
+                                . $seance->getSessionSubject()
+                                . $seance->getSessionTeacher()
+                                . $seance->getSessionRoom()
+                                . '</div>'
+
+                              ;
                               $str .= '</div>';
                           }
                           $str .='</div>"';
@@ -196,7 +220,17 @@ class EdtDay {
                               $coefficient = $seance->getSessionLength() / 15;
                               $length = $seance->getSessionLength() + ($coefficient * 2);
                               $str .= '<div class="seance" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
-                              $str .= '<div class="seance-title" style="position: relative; background-color: #b9aafb;">' . $seance->getSessionType() . '</div>';
+                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getcolor() .';">'
+                                  . $seance->getSessionType()
+                                  . '<span>' . $seance->getSessionStartTime() .'</span>-'
+                                  . '<span>' . $seance->getSessionEndTime() .'</span>'
+                                  . '</div>'
+                                  . '<div>'
+                                  . $seance->getSessionSubject()
+                                  . $seance->getSessionTeacher()
+                                  . $seance->getSessionRoom()
+                                  . '</div>'
+                              ;
                               $str .= '</div>';
                           }
                       }

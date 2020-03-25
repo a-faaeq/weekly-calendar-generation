@@ -24,7 +24,13 @@
         <div class="title" id="monday-title">Lundi</div>
         <div class="title" id="monday-filter-1">Filtre 1</div>
       <?php
-      echo $edt->buildDay($result);
+      echo $edt->buildDay(
+              $result,
+              $options = [
+                  'cellClass' => 'cell',
+                  'seanceClass' => 'seance',
+                  'seanceTitleClass' => 'seance-title'
+              ]);
       ?>
   </div>
 

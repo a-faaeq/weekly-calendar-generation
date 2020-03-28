@@ -154,6 +154,7 @@ class EdtDay {
             'cellClass' => null,
             'seanceClass' => null,
             'seanceTitleClass' => null,
+            'cellWidth' => 100,
 
         ])
     {
@@ -219,7 +220,7 @@ class EdtDay {
                           foreach($groupSeance['sessions'] as $seance) {
                               $coefficient = $seance->getSessionLength() / 15;
                               $length = $seance->getSessionLength() + ($coefficient * 2);
-                              $str .= '<div class="seance" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
+                              $str .= '<div class="seance" style="width: '. $options['cellWidth'] .'%; height: ' . ($length) . 'px; position: relative;">';
                               $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getcolor() .';">'
                                   . $seance->getSessionType()
                                   . '<span>' . $seance->getSessionStartTime() .'</span>-'

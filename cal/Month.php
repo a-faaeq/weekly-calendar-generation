@@ -160,12 +160,7 @@ class Month {
         } else {
             $monday->modify('+'. ($week - 2) . ' week');
         }
-
-        if (intval($monday->format('w')) === 1 ) {
-          return $monday;
-        }
-
-        return $monday->modify('last monday');
+        return $monday;
     }
 
     /**

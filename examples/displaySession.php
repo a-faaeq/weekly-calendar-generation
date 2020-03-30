@@ -59,24 +59,13 @@
 $filtre1 = [
     [
         0 => 1233443,
-        1 => '2020-03-23',
+        1 => '2020-03-24',
         2 => '800',
         3 => '60', // 130 signifie 1h30
         4 => 'TD',
         5 => 'Mathematiques',
         6 => 'Toto',
         7 => 'R10',
-        8 => []
-    ],
-    [
-        0 => 1233443,
-        1 => '2020-03-23',
-        2 => '900',
-        3 => '200', // 130 signifie 1h30
-        4 => 'TD',
-        5 => 'Mathematiques',
-        6 => 'Toto',
-        7 => 'R08',
         8 => []
     ],
     [
@@ -90,6 +79,17 @@ $filtre1 = [
         7 => 'R12',
         8 => []
     ],
+    [
+        0 => 1233443,
+        1 => '2020-03-24',
+        2 => '830',
+        3 => '100', // 130 signifie 1h30
+        4 => 'TD',
+        5 => 'Mathematiques',
+        6 => 'Donald',
+        7 => 'R12',
+        8 => []
+    ]
 ];
 
 $colors = [
@@ -108,7 +108,7 @@ $colors = [
 
     $sessions = $edt->sessions($filtre1, $colors);
 
-   $userSessions = $edt->sessionTable($sessions, '2020-03-23');
+   $userSessions = $edt->sessionTable($sessions, '2020-03-24');
 
    // ensuite on regroupe les sessions liées
     $result = $edt->bundleSession($userSessions);

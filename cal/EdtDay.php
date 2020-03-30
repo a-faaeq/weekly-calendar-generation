@@ -174,7 +174,7 @@ class EdtDay {
                       // Dans le cas ou il y aurait plus d'une session sur le même créneau
                       if ($sessionsNumber > 1) {
                           $percent = 100 / $sessionsNumber;
-                          $str .='<div class="'. $options['seanceClass'] .'">';
+                          $str .='<div class="groupSeance">';
                           foreach($groupSeance['sessions'] as $seance) {
                               $indexSession += 1;
                               $coefficient = $seance->getSessionLength() / 15;
@@ -190,8 +190,7 @@ class EdtDay {
                               $str .= '<div class="'. $options['seanceClass'] .'" style="width: '. $percent . '%; height: '
                                   . ($length) . 'px; position: relative; top: ' . $top . 'px;">';
 
-                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '
-                                  . $seance->getColor() .';">'
+                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: #F5502D;">'
                                   . '<span>' . $seance->getSessionType() . '</span>'
                                   . '<span>' . $seance->getSessionStartTime() .'</span>-'
                                   . '<span>' . $seance->getSessionEndTime() .'</span>'
@@ -202,16 +201,15 @@ class EdtDay {
                                 . $seance->getSessionTeacher()
                                 . $seance->getSessionRoom()
                                 . '</div>'
-
                               ;
                               $str .= '</div>';
                           }
-                          $str .='</div>"';
+                          $str .='</div>';
                       } else {
                           foreach($groupSeance['sessions'] as $seance) {
                               $coefficient = $seance->getSessionLength() / 15;
                               $length = $seance->getSessionLength() + ($coefficient * 2);
-                              $str .= '<div class="seance" style="width: '. $options['cellWidth'] .'%; height: ' . ($length) . 'px; position: relative;">';
+                              $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
                               $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getcolor() .';">'
                                   . $seance->getSessionType()
                                   . '<span>' . $seance->getSessionStartTime() .'</span>-'

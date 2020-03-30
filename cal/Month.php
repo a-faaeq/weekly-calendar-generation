@@ -163,6 +163,68 @@ class Month {
     }
 
     /**
+     * @param \DateTime $monday
+     * @return array
+     */
+    public function tabOfWeek(\DateTime $monday)
+    {
+        $cloneMonday = clone($monday);
+        /*
+         * Tableau des jours 1: Lundi, 2: Mardi, 3: Mercredi, 4: Jeudi, 5: Vendredi, 6: Samedi
+         */
+        return [
+          1 => [
+              'datetime' => $cloneMonday,
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Lundi'
+          ],
+          2 => [
+              'datetime' => $cloneMonday->modify('+ 1 day'),
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Mardi'
+          ],
+          3 => [
+              'datetime' => $cloneMonday->modify('+ 1 day'),
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Mercredi'
+          ],
+          4 => [
+              'datetime' => $cloneMonday->modify('+ 1 day'),
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Jeudi'
+          ],
+          5 => [
+              'datetime' => $cloneMonday->modify('+ 1 day'),
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Vendredi'
+          ],
+          6 => [
+              'datetime' => $cloneMonday->modify('+ 1 day'),
+              'year' => $cloneMonday->format('Y'),
+              'month' => $cloneMonday->format('m'),
+              'week' => $cloneMonday->format('W'),
+              'day' => $cloneMonday->format('d'),
+              'name' => 'Samedi'
+          ],
+        ];
+    }
+
+    /**
      * Donne le dernier jour du mois
      * @return \DateTime
      * @throws \Exception

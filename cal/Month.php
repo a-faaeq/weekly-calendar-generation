@@ -143,19 +143,17 @@ class Month {
     public function mondayOfWeek($week)
     {
         $firstDateYear = $this->startYearDay();
-        $day = $firstDateYear->format('w');
+        $monday = clone($firstDateYear);
+        $day = $monday->format('w');
 
+        // Dans le cas ou le 1er jour n'est pas un lundi
         if ($day !== "1") {
-            $firstDateYear->modify(' last monday');
+            $monday->modify(' last monday');
         }
 
-        if (intval($firstDateYear->format('W')) === 1) {
-            $firstDateYear->modify('+'. ($week - 1) . ' week');
-        } else {
-            $firstDateYear->modify('+'. ($week) . ' week');
-        }
-
-        return $firstDateYear;
+        $monday->modify('+'. ($week - 1) . ' week');
+        
+        return $monday;
     }
 
     /**

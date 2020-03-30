@@ -144,16 +144,22 @@ class Month {
     {
         $firstDateYear = $this->startYearDay();
         $monday = clone($firstDateYear);
-        $day = $monday->format('w');
+        $day = intval($monday->format('w'));
 
         // Dans le cas ou le 1er jour n'est pas un lundi
-        if ($day !== "1") {
+        if ($day !== 1) {
             $monday->modify(' last monday');
         }
 
-        $monday->modify('+'. ($week - 1) . ' week');
-        
-        return $monday;
+        // On récupère la semaine du premier lundi
+        $firstWeek = intval($monday->format('W'));
+
+        // Dans le cas ou la semaine n'est pas la première de l'année (Le jour 1 n'est pas un lundi)
+        if ($firstWeek !== 1) {
+            return $monday->modify(' +' . $week . ' week');
+        }
+
+        return $monday->modify('+'. ($week - 1) . ' week');
     }
 
     /**

@@ -305,8 +305,8 @@ class EdtDay {
 
         // Nombre de ligne (1/4 heure = 1ligne)
         $nbRows = $nbHours / 4;
-        
-        $str .= '<div id="hours">';
+
+        $str = '<div id="hours">';
         for ($i = 0; $i < ($nbRows + 1); $i++) {
             $str .= '<div class="hour">';
             $str .= '<span>';

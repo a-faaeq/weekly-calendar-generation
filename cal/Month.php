@@ -156,10 +156,10 @@ class Month {
 
         // Dans le cas ou la semaine n'est pas la première de l'année (Le jour 1 n'est pas un lundi)
         if ($firstWeek !== 1) {
-            $monday->modify(' +' . ($week) . ' week');
+            $monday->modify(' +' . (intval($week)) . ' week');
         }
-        
-        return $monday->modify('+' . ($week -1) . ' week');
+
+        return $monday->modify('+' . (intval($week) -1) . ' week');
     }
 
     /**

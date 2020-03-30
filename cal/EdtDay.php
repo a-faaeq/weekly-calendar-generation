@@ -292,6 +292,37 @@ class EdtDay {
     }
 
     /**
+     * Méthode permettant de générer une colonne heure
+     * @param $start // heure de début de jounnée en minutes
+     * @param $end // heure de fin de journée en minutes
+     * @return string
+     */
+    public function colHours($start, $end)
+    {
+        $startTime = $start;
+        // Nombre d'heures dans la journée
+        $nbHours = $end - $start;
+
+        // Nombre de ligne (1/4 heure = 1ligne)
+        $nbRows = $nbHours / 4;
+        
+        $str .= '<div id="hours">';
+        for ($i = 0; $i < ($nbRows + 1); $i++) {
+            $str .= '<div class="hour">';
+            $str .= '<span>';
+            if ($startTime%60 === 0) {
+                $str .= $startTime/60 . 'h00';
+            } elseif ($startTime%60 === 30) {
+                $str .= round($startTime/60, 0, PHP_ROUND_HALF_DOWN) .'h30';
+            }
+            $str .= '</span></div>';
+            $startTime += 15;
+        }
+        $str .= '</div>';
+        return $str;
+    }
+
+    /**
      * @return float|int
      */
     public function getStartTimeDay()

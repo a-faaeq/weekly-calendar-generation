@@ -170,6 +170,8 @@ class Session {
      */
     public function setSessionDate($sessionDate): void
     {
+        $tmp = explode('-', $sessionDate);
+        $sessionDate = intval($tmp[0] . '-' . intval($tmp[1]) . '-' . intval($tmp[2]));
         $this->sessionDate = $sessionDate;
     }
 

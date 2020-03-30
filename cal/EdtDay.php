@@ -63,6 +63,9 @@ class EdtDay {
      */
     public function sessionTable(array $sessions, $day)
     {
+        $dayTab = explode('-', $day);
+        $day = intval($dayTab[0] . '-' . intval($dayTab[1]) . '-' . intval($dayTab[2]));
+
         $sessionTable = [];
         // On parcourt le tableau utilisateur pour récupérer uniquement les séances correspondant au jour donné
         foreach ($sessions as $session) {
@@ -71,18 +74,6 @@ class EdtDay {
             }
         }
         return $sessionTable;
-    }
-
-    public function getHours()
-    {
-        $str = '<div style="height: 40px;"></div>';
-        $start = 480;
-        for ($i = 0; $i < 22; $i++) {
-            $str .= '<div class="hour">' . $start . '</div>';
-            $start += 30;
-        }
-
-        return $str;
     }
 
     /**

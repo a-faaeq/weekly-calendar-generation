@@ -32,7 +32,7 @@ class Session {
         $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
         $this->setColor($colors);
         $this->setStartTimeFormatHour($this->sessionStartTime);
-        $this->setEndTimeFormatHour($this->endTimeFormatHour);
+        $this->setEndTimeFormatHour($this->sessionEndTime);
     }
 
     /**

@@ -110,7 +110,7 @@ $colors = [
     $sessions = $edt->sessions($filtre1, $colors);
 
     foreach ($sessions as $session) {
-        $test = $session->formatHour(570);
+        $test = $session->formatHour(870);
 
         die(var_dump($test));
     }

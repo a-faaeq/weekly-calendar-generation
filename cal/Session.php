@@ -99,6 +99,10 @@ class Session {
         $minTime = intval($minTime);
         $modulo = $minTime%60;
 
+        if ($modulo === 0) {
+            return intval($minTime/60) . 'h00';
+        }
+
         return intval($minTime/60) . 'h' . $modulo;
     }
 

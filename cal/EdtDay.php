@@ -197,9 +197,9 @@ class EdtDay {
                                   . '</div>'
 
                                 . '<div class="seance-content">'
-                                . $seance->getSessionSubject() . '<br/>'
-                                . $seance->getSessionTeacher() . '<br/>'
-                                . $seance->getSessionRoom() . '<br/>'
+                                . '<span>' . $seance->getSessionSubject() . '</span><br/>'
+                                . '<span>' . $seance->getSessionTeacher() . '</span><br/>'
+                                . '<span>' . $seance->getSessionRoom() . '</span><br/>'
                                 . '</div>'
                               ;
                               $str .= '</div>';
@@ -211,14 +211,14 @@ class EdtDay {
                               $length = $seance->getSessionLength() + ($coefficient * 2);
                               $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
                               $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor() .';">'
-                                  . $seance->getSessionType()
+                                  . '<span>' .$seance->getSessionType() . '</span>'
                                   . '<span>' . $seance->getStartTimeFormatHour() .'</span>-'
                                   . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                                   . '</div>'
                                   . '<div class="seance-content">'
-                                  . $seance->getSessionSubject() . '<br/>'
-                                  . $seance->getSessionTeacher() . '<br/>'
-                                  . $seance->getSessionRoom() . '<br/>'
+                                  . '<span>' . $seance->getSessionSubject() . '</span><br/>'
+                                  . '<span>' . $seance->getSessionTeacher() . '</span><br/>'
+                                  . '<span>' . $seance->getSessionRoom() . '</span><br/>'
                                   . '</div>'
                               ;
                               $str .= '</div>';

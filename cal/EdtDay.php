@@ -196,7 +196,7 @@ class EdtDay {
                                   . '<span>' . $seance->getEndTimeFormatHour() .'</span><br/>'
                                   . '</div>'
 
-                                . '<div>'
+                                . '<div class="seance-content">'
                                 . $seance->getSessionSubject() . '<br/>'
                                 . $seance->getSessionTeacher() . '<br/>'
                                 . $seance->getSessionRoom() . '<br/>'
@@ -215,7 +215,7 @@ class EdtDay {
                                   . '<span>' . $seance->getStartTimeFormatHour() .'</span>-'
                                   . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                                   . '</div>'
-                                  . '<div>'
+                                  . '<div class="seance-content">'
                                   . $seance->getSessionSubject()
                                   . $seance->getSessionTeacher()
                                   . $seance->getSessionRoom()

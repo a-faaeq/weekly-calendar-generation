@@ -16,6 +16,8 @@ class Session {
     private $sessionGroups;
     private $previousSession;
     private $color;
+    private $startTimeFormatHour;
+    private $endTimeFormatHour;
 
     public function __construct($data, $colors)
     {
@@ -29,6 +31,8 @@ class Session {
         $this->setSessionRoom(($data[7]));
         $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
         $this->setColor($colors);
+        $this->setStartTimeFormatHour($this->sessionStartTime);
+        $this->setEndTimeFormatHour($this->endTimeFormatHour);
     }
 
     /**
@@ -84,6 +88,18 @@ class Session {
     public function getSessionLength()
     {
         return $this->sessionLength;
+    }
+
+    /**
+     * @param $minTime
+     * @return string
+     */
+    public function formatHour(int $minTime): string
+    {
+        $minTime = intval($minTime);
+        $modulo = $minTime%60;
+
+        return intval($minTime/60) . 'h' . $modulo;
     }
 
     /**
@@ -261,4 +277,38 @@ class Session {
             }
         }
     }
+
+    /**
+     * @return mixed
+     */
+    public function getStartTimeFormatHour()
+    {
+        return $this->startTimeFormatHour;
+    }
+
+    /**
+     * @param mixed $startTimeFormatHour
+     */
+    public function setStartTimeFormatHour($startTimeFormatHour): void
+    {
+        $this->startTimeFormatHour = $startTimeFormatHour;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndTimeFormatHour()
+    {
+        return $this->endTimeFormatHour;
+    }
+
+    /**
+     * @param mixed $endTimeFormatHour
+     */
+    public function setEndTimeFormatHour($endTimeFormatHour): void
+    {
+        $this->endTimeFormatHour = $endTimeFormatHour;
+    }
+
+
 }

@@ -102,11 +102,18 @@ $colors = [
     'Reservation' => '#FFFF01'
 ];
 
+
    $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
 
    // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
 
     $sessions = $edt->sessions($filtre1, $colors);
+
+    foreach ($sessions as $session) {
+        $test = $session->formatHour(570);
+
+        die(var_dump($test));
+    }
 
    $userSessions = $edt->sessionTable($sessions, '2020-03-24');
 

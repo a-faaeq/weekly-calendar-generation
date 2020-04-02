@@ -190,16 +190,16 @@ class EdtDay {
                               $str .= '<div class="'. $options['seanceClass'] .'" style="width: '. $percent . '%; height: '
                                   . ($length) . 'px; position: relative; top: ' . $top . 'px;">';
 
-                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: #F5502D;">'
-                                  . '<span>' . $seance->getSessionType() . '</span>'
-                                  . '<span>' . $seance->getSessionStartTime() .'</span>-'
-                                  . '<span>' . $seance->getSessionEndTime() .'</span>'
+                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor().';">'
+                                  . '<span>' . $seance->getSessionType() . '</span><br/>'
+                                  . '<span>' . $seance->getStartTimeFormatHour() .'</span><br/>'
+                                  . '<span>' . $seance->getEndTimeFormatHour() .'</span><br/>'
                                   . '</div>'
 
                                 . '<div>'
-                                . $seance->getSessionSubject()
-                                . $seance->getSessionTeacher()
-                                . $seance->getSessionRoom()
+                                . $seance->getSessionSubject() . '<br/>'
+                                . $seance->getSessionTeacher() . '<br/>'
+                                . $seance->getSessionRoom() . '<br/>'
                                 . '</div>'
                               ;
                               $str .= '</div>';
@@ -210,7 +210,7 @@ class EdtDay {
                               $coefficient = $seance->getSessionLength() / 15;
                               $length = $seance->getSessionLength() + ($coefficient * 2);
                               $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
-                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getcolor() .';">'
+                              $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor() .';">'
                                   . $seance->getSessionType()
                                   . '<span>' . $seance->getSessionStartTime() .'</span>-'
                                   . '<span>' . $seance->getSessionEndTime() .'</span>'

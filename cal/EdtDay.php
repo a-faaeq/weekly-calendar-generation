@@ -216,9 +216,9 @@ class EdtDay {
                                   . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                                   . '</div>'
                                   . '<div class="seance-content">'
-                                  . $seance->getSessionSubject()
-                                  . $seance->getSessionTeacher()
-                                  . $seance->getSessionRoom()
+                                  . $seance->getSessionSubject() . '<br/>'
+                                  . $seance->getSessionTeacher() . '<br/>'
+                                  . $seance->getSessionRoom() . '<br/>'
                                   . '</div>'
                               ;
                               $str .= '</div>';

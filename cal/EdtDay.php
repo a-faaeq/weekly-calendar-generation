@@ -212,8 +212,8 @@ class EdtDay {
                               $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
                               $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor() .';">'
                                   . $seance->getSessionType()
-                                  . '<span>' . $seance->getSessionStartTime() .'</span>-'
-                                  . '<span>' . $seance->getSessionEndTime() .'</span>'
+                                  . '<span>' . $seance->getStartTimeFormatHour() .'</span>-'
+                                  . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                                   . '</div>'
                                   . '<div>'
                                   . $seance->getSessionSubject()

@@ -291,7 +291,7 @@ class Session {
      */
     public function setStartTimeFormatHour($startTimeFormatHour): void
     {
-        $this->startTimeFormatHour = $startTimeFormatHour;
+        $this->startTimeFormatHour = $this->formatHour($startTimeFormatHour);
     }
 
     /**
@@ -307,7 +307,7 @@ class Session {
      */
     public function setEndTimeFormatHour($endTimeFormatHour): void
     {
-        $this->endTimeFormatHour = $endTimeFormatHour;
+        $this->endTimeFormatHour = $this->formatHour($endTimeFormatHour);
     }
 
 

@@ -178,7 +178,7 @@ class EdtDay {
                           foreach($groupSeance['sessions'] as $seance) {
                               $indexSession += 1;
                               $coefficient = $seance->getSessionLength() / 15;
-                              $length = $seance->getSessionLength() + ($coefficient * 3);
+                              $length = $seance->getSessionLength() + ($coefficient * 2);
 
                               $top = $distance = $seance->getSessionStartTime() - $firstHour;;
                               if (($seance->getSessionStartTime() - $firstHour) > 0) {

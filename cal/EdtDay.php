@@ -208,7 +208,8 @@ class EdtDay {
                       } else {
                           foreach($groupSeance['sessions'] as $seance) {
                               $coefficient = $seance->getSessionLength() / 15;
-                              $length = $seance->getSessionLength(); // + ($coefficient * 2);
+                              // Longueur d'une séance en comptant les bordures (nbre de cell 15 px + 1 px)
+                              $length = $seance->getSessionLength() + $coefficient + 1;
                               $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: ' . ($length) . 'px; position: relative;">';
                               $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor() .';">'
                                   . '<span>' .$seance->getSessionType() . '</span>'

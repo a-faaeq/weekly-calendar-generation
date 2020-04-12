@@ -18,6 +18,7 @@ class Session {
     private $color;
     private $startTimeFormatHour;
     private $endTimeFormatHour;
+    private $alias;
 
     public function __construct($data, $colors)
     {
@@ -27,8 +28,9 @@ class Session {
         $this->setSessionLength($data[3]);
         $this->setSessionType($data[4]);
         $this->setSessionSubject($data[5]);
-        $this->setSessionTeacher($data[6]);
-        $this->setSessionRoom(($data[7]));
+        $this->setAlias($data[6]);
+        $this->setSessionTeacher($data[7]);
+        $this->setSessionRoom(($data[8]));
         $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
         $this->setColor($colors);
         $this->setStartTimeFormatHour($this->sessionStartTime);
@@ -314,5 +316,19 @@ class Session {
         $this->endTimeFormatHour = $this->formatHour(intval($endTimeFormatHour));
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAlias()
+    {
+        return $this->alias;
+    }
 
+    /**
+     * @param mixed $alias
+     */
+    public function setAlias($alias): void
+    {
+        $this->alias = $alias;
+    }
 }

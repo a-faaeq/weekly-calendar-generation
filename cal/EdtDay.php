@@ -197,7 +197,7 @@ class EdtDay {
                                   . '</div>'
 
                                 . '<div class="seance-content">'
-                                . '<div>' . $seance->getAlias() . '</div>'
+                                . '<div>' . $seance->getSubjectAlias() . '</div>'
                                 . '<div>' . $seance->getSessionTeacher() . '</div>'
                                 . '<div>' . $seance->getRoomAlias() . '</div>'
                                 . '</div>'
@@ -216,7 +216,7 @@ class EdtDay {
                                   . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                                   . '</div>'
                                   . '<div class="seance-content">'
-                                  . '<div>' . $seance->getAlias() . '</div>'
+                                  . '<div>' . $seance->getSubjectAlias() . '</div>'
                                   . '<div>' . $seance->getSessionTeacher() . '</div>'
                                   . '<div>' . $seance->getRoomAlias() . '</div>'
                                   . '</div>'

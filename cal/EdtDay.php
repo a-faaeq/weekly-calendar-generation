@@ -199,7 +199,7 @@ class EdtDay {
                                 . '<div class="seance-content">'
                                 . '<div>' . $seance->getAlias() . '</div>'
                                 . '<div>' . $seance->getSessionTeacher() . '</div>'
-                                . '<div>' . $seance->getSessionRoom() . '</div>'
+                                . '<div>' . $seance->getRoomAlias() . '</div>'
                                 . '</div>'
                               ;
                               $str .= '</div>';
@@ -218,7 +218,7 @@ class EdtDay {
                                   . '<div class="seance-content">'
                                   . '<div>' . $seance->getAlias() . '</div>'
                                   . '<div>' . $seance->getSessionTeacher() . '</div>'
-                                  . '<div>' . $seance->getSessionRoom() . '</div>'
+                                  . '<div>' . $seance->getRoomAlias() . '</div>'
                                   . '</div>'
                               ;
                               $str .= '</div>';

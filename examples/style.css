@@ -5,13 +5,35 @@
     width: 300px;
 }
 
+.title-vertical {
+    writing-mode: sideways-lr;
+    width: 20px;
+    border: 1px solid;
+    min-height: 200px;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
 .table-center {
     display: flex;
     justify-content: center;
 }
 
+.table-vertical {
+    display: flex;
+    flex-direction: column;
+    width: 895px;
+    margin:auto;
+}
+
 .day {
     border: 1px solid;
+}
+
+.dayV {
+    border: 1px solid;
+    display: flex;
+
 }
 
 .cell {
@@ -19,6 +41,13 @@
     border-bottom: 1px solid transparent;
     width: 300px;
     height: 15px;
+    margin: 1px;
+}
+
+.cellV {
+    border: 1px solid lightgray;
+    width: 15px;
+    min-height: 200px;
     margin: 1px;
 }
 
@@ -37,6 +66,16 @@
     padding-right: 2px;
 }
 
+.hourV {
+    z-index: 2;
+    writing-mode: sideways-lr;
+    border: 1px solid transparent;
+    width: 15px;
+    height: 200px;
+    margin: 1px;
+    padding-bottom: 2px;
+}
+
 .seance {
 
     background-color: white;
@@ -45,9 +84,20 @@
     border-radius: 1%;
 }
 
+.seanceV {
+    background-color: white;
+    border: 1px solid;
+    margin-bottom: 1px;
+    border-radius: 1%;
+}
+
 .groupSeance {
     display: flex;
     padding-left: 1px;
+}
+
+.groupSeanceV {
+    padding-bottom: 1px;
 }
 
 .seance-title {

@@ -384,6 +384,35 @@ class EdtDay {
     }
 
     /**
+     * @param $start
+     * @param $end
+     * @return string
+     */
+    public function rowHours($start, $end)
+    {
+        $startTime = $start;
+        // Nombre d'heures dans la journée
+        $nbHours = $end - $start;
+
+        // Nombre de colonnes (1/4 heure = 1 colonne)
+        $nbRows = $nbHours / 15;
+        $str = '<span class="hourV"></span><span class="hourV"></span>';
+
+        for ($i = 0; $i < ($nbRows + 1); $i++)
+        {
+            $str .= '<span class="hourV">';
+            if ($start % 60 === 0) {
+                $str .= intdiv($start, 60) . 'h00';
+            } elseif ($start % 60 === 30) {
+                $str .= intdiv($start, 60) . 'h30';
+            }
+            $str .= '</span>';
+            $start += 15;
+        }
+        return $str;
+    }
+
+    /**
      * @return float|int
      */
     public function getStartTimeDay()

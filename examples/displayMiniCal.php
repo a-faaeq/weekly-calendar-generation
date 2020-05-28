@@ -15,7 +15,7 @@
 require '../cal/Month.php';
 
 
-$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(3, 2020);
+$month = new \Sebius77\WeeklyCalendarGeneration\cal\Month(2020, 05);
 
 $month->getWeeks();
 

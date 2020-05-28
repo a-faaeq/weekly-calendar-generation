@@ -23,50 +23,20 @@ $end = 19*60;
 // Avec l'heure de début et l'heure de fin, nous pouvons déterminer le nombre de cellule d'1/4 heures dans 1 journée
 $cellNumber = (19-8)*4;
 
-// xxxx -> Année [0]
-// xx -> Mois [1]
-// XX -> Jour [2]
-// XX -> Heure de début [3]
-// xxxx -> Durée de la séance en minute [4]
-// xxxxxxxx -> Type du cours [5]
-/*
-      $user1 = [
-          '2020-2-24-08-60-A',
-          '2020-2-24-10-60-B',
-          '2020-2-24-08-30-C',
-          '2020-2-24-09-30-D',
-          '2020-2-24-14-240-E',
-          '2020-2-24-18-60-F',
-          '2020-2-24-13-60-G',
-          '2020-2-24-08-45-H',
-          '2020-2-24-16-30-I',
-      ];
-    $jour2 = [
-    '2020-2-25-08-60-A',
-    '2020-2-25-11-60-B',
-    '2020-2-25-09-60-C',
-    '2020-2-25-13-60-D',
-    '2020-2-25-14-60-E',
-    '2020-2-25-15-60-F',
-    '2020-2-25-16-60-G',
-    '2020-2-25-17-60-H',
-    ];
-*/
-
 
 // Filtre 1 : codeProf
 $filtre1 = [
     [
-        0 => 1233443,
-        1 => '2020-03-24',
-        2 => '800',
-        3 => '60', // 130 signifie 1h30
-        4 => 'TD',
-        5 => 'Mathematiques',
-        6 => 'Toto',
+        0 => 1233443, // code Ressource
+        1 => '2020-03-24', // Date du jour
+        2 => '800', // Heure de début
+        3 => '60', // 130 signifie 1h30 ; Durée séance
+        4 => 'TD', // Type de séance
+        5 => 'Mathematiques', // nom de matière
+        6 => 'Toto', // nom de l'enseignant
         7 => 'R10',
         8 => [],
-        9 => 'salle-test'
+        9 => 'salle-test', // nom de salle
     ],
     [
         0 => 1233443,
@@ -116,7 +86,6 @@ $colors = [
     'Reservation' => '#FFFF01'
 ];
 
-
 $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
 
 // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
@@ -134,8 +103,6 @@ $result2 = $edt->bundleSession($userSession2);
 */
 include('weekCalHorizontal.php');
 
-
 ?>
-
 </body>
 </html>

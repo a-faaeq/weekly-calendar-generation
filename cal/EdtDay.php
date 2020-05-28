@@ -4,10 +4,10 @@ namespace Sebius77\WeeklyCalendarGeneration\cal;
 
 class EdtDay {
 
-    private $startTimeDay;
-    private $endTimeDay;
-    private $cellnumber;
-    private $sessionTable;
+    private $startTimeDay; // start time of day in hour
+    private $endTimeDay; // end time of day in hour
+    private $cellnumber; // number of cells in a day; 1 hour = 4 cells (1 cell = 15 mn)
+    private $sessionTable; // array grouping the sessions of a given day
 
     public function __construct($startTimeDay, $endTimeDay)
     {
@@ -162,9 +162,7 @@ class EdtDay {
                   if ($i === $groupSeance['firstHour'] ) {
                       // On compte le nombre de séance qui se chevauche
                       $sessionsNumber = count($groupSeance['sessions']);
-
                       $str .= $this->generateStringHTML($sessionsNumber, $groupSeance, $options, 'H');
-
                   }
             }
             $str .= '</div>';
@@ -248,7 +246,6 @@ class EdtDay {
                                '. $length .'px; position: relative; top: ' . $top . 'px;">';
                 }
 
-
                 $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor().';">'
                     . '<span>' . $seance->getSessionType() . '</span><br/>'
                     . '<span>' . $seance->getStartTimeFormatHour() .'</span>'
@@ -293,7 +290,6 @@ class EdtDay {
         }
         return $str;
     }
-
 
     /**
      * Permet de trier les groupes de séances et les mettre dans l'ordre chronologique

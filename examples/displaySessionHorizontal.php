@@ -22,16 +22,6 @@ require '../cal/SessionManager.php';
 require '../cal/HtmlGenerator.php';
 require '../cal/Filter.php';
 
-/*
-// Heure début
-$start = 8*60;
-// Heure fin
-$end = 19*60;
-
-// Avec l'heure de début et l'heure de fin, nous pouvons déterminer le nombre de cellule d'1/4 heures dans 1 journée
-$cellNumber = (19-8)*4;
-*/
-
 // Traitement via le filtre en fonction de la catégorie (prof), du code (12345) et de la ou des dates.
 // ------------- Première requête --------------------
 // On récupère le nom du filtre (nom de l'enseignant si catégorie prof, nom du groupe si groupe, nom de la salle si salle)
@@ -95,32 +85,9 @@ $data = [
     ]
 ];
 
-
-
-
-/***
- * Ancienne manière de faire
- */
-
-//$edt = New \Sebius77\WeeklyCalendarGeneration\cal\Day(8, 19);
-
-// On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
-
-//$sessions = $edt->sessions($filtre1, $colors);
-
-//$userSessions = $edt->sessionTable($sessions, '2020-03-24');
-
-// ensuite on regroupe les sessions liées
-//$result = $edt->bundleSession($userSessions);
-
-//include('weekCalHorizontal.php');
-
 /**
  * Nouvelle façon de faire
  */
-
-$colors =
-
 
 $sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
 $day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
@@ -141,7 +108,6 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
 );
 
 echo $edt->calendar();
-
 
 ?>
 </body>

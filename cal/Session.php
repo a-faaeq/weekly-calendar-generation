@@ -21,7 +21,7 @@ class Session {
     private $subjectAlias;
     private $roomAlias;
 
-    public function __construct($data, $colors)
+    public function __construct($data)
     {
         $this->setSessionCode($data[0]);
         $this->setSessionDate($data[1]);
@@ -34,7 +34,6 @@ class Session {
         $this->setSessionRoom(($data[8]));
         $this->setRoomAlias($data[9]);
         $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
-        $this->setColor($colors);
         $this->setStartTimeFormatHour($this->sessionStartTime);
         $this->setEndTimeFormatHour($this->sessionEndTime);
     }

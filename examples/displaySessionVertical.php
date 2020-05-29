@@ -12,7 +12,7 @@
 
 <?php
 
-    require '../cal/EdtDay.php';
+    require '../cal/Day.php';
     require '../cal/Session.php';
 
     // Heure début
@@ -93,7 +93,7 @@ $colors = [
     'Reservation' => '#FFFF01'
 ];
 
-   $edt = New \Sebius77\WeeklyCalendarGeneration\cal\EdtDay(8, 19);
+   $edt = New \Sebius77\WeeklyCalendarGeneration\cal\Day(8, 19);
 
    // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
 

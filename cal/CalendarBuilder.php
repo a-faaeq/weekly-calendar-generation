@@ -58,7 +58,13 @@ class CalendarBuilder
      */
     public function colHours() : string
     {
-        $str = '<div id="'. $this->cssOption['idHoursDiv'] .'">';
+        if ($this->orientation === 0) {
+            $str = '<div id="'. $this->cssOption['idHoursDiv'] .'">';
+        } elseif ($this->orientation === 1) {
+            $str = '<div>';
+            $str .= '<span class="hourV"></span><span class="hourV"></span>';
+        }
+
         $startTime = $this->startTime * 60;
         $endTime = $this->endTime * 60;
         $diff = $endTime - $startTime;
@@ -67,15 +73,29 @@ class CalendarBuilder
         $cellNumber = $diff / 15;
 
         for ($i = 0; $i < ($cellNumber +1); $i++) {
-            $str.= '<div class="' . $this->cssOption['cssHourClass'] . '">';
-            $str .= '<span>';
+            if ($this->orientation === 0) {
+                $str.= '<div class="' . $this->cssOption['cssHourClass'] . '">';
+                $str .= '<span>';
+            }
+
+            if ($this->orientation === 1) {
+                $str .= '<span class="hourV">';
+            }
+
             if ($startTime % 60 === 0) {
                 $str .= intdiv($startTime, 60) . 'h00';
             } elseif ($startTime % 60 === 30) {
                 $str .= round($startTime/60, 0, PHP_ROUND_HALF_DOWN) .'h30';
             }
-            $str .= '</span>';
-            $str .= '</div>';
+            if($this->orientation === 0) {
+                $str .= '</span>';
+                $str .= '</div>';
+            }
+
+            if ($this->orientation === 1) {
+                $str .= '</span>';
+            }
+
             $startTime += 15;
         }
         $str .= '</div>';
@@ -84,6 +104,9 @@ class CalendarBuilder
 
     public function firstString() : string
     {
+        if ($this->orientation === 1) {
+            return '<div class="table-vertical">';
+        }
         return '<div class="table-center">';
     }
 
@@ -141,23 +164,48 @@ class CalendarBuilder
     public function buildDay()
     {
         $date = '2020-03-24';
+        $str = '';
 
-        $str = '<div id="monday" class="day">';
-        $str .= '<div class="title" id="monday-title">Lundi</div>';
+        if ($this->orientation === 0) {
+            $str = '<div id="monday" class="day">';
+            $str .= '<div class="title" id="monday-title">Lundi</div>';
+        }
+
+        if ($this->orientation === 1) {
+            $str = '<div id="monday" class="dayV">';
+            $str .= '<div class="title-vertical" id="monday-title">Lundi</div>';
+        }
 
         foreach ($this->getData() as $filter) {
-            $str .= '<div class="title" id="monday-filter-1">'. $filter->getName() .'</div>';
+            if ($this->orientation === 0) {
+                $str .= '<div class="title" id="monday-filter-1">'. $filter->getName() .'</div>';
+            }
+
+            if ($this->orientation === 1) {
+                $str .= '<div class="title-vertical" id="monday-filter-1">'. $filter->getName() .'</div>';
+            }
 
             $sessions = $filter->getSessions();
 
             $daySessions = $this->sessionManager->sessionTable($sessions, $date);
             $groupSession = $this->sessionManager->bundleSession($daySessions);
 
-            $str .= $this->day->buildDay($groupSession,  $options = [
-                'cellClass' => 'cell',
-                'seanceClass' => 'seance',
-                'seanceTitleClass' => 'seance-title'
-            ]);
+            if ($this->orientation === 0) {
+                $str .= $this->day->buildDay($groupSession,  $options = [
+                    'cellClass' => 'cell',
+                    'seanceClass' => 'seance',
+                    'seanceTitleClass' => 'seance-title'
+                ]);
+            }
+
+            if ($this->orientation === 1) {
+                $str .= $this->day->buildDay($groupSession,  $options = [
+                    'cellClass' => 'cellV',
+                    'seanceClass' => 'seanceV',
+                    'seanceTitleClass' => 'seance-title'
+                ]);
+            }
+
         }
         return $str;
     }

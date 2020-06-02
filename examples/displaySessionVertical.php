@@ -12,76 +12,17 @@
 
 <?php
 
-    require '../cal/Day.php';
-    require '../cal/Session.php';
+use Sebius77\WeeklyCalendarGeneration\cal\Day;
+use Sebius77\WeeklyCalendarGeneration\cal\HtmlGenerator;
 
-    // Heure début
-    $start = 8*60;
-    // Heure fin
-    $end = 19*60;
+require '../cal/Day.php';
+require '../cal/Session.php';
+require '../cal/CalendarBuilder.php';
+require '../cal/SessionManager.php';
+require '../cal/HtmlGenerator.php';
+require '../cal/Filter.php';
 
-    // Avec l'heure de début et l'heure de fin, nous pouvons déterminer le nombre de cellule d'1/4 heures dans 1 journée
-    $cellNumber = (19-8)*4;
-
-    // xxxx -> Année [0]
-    // xx -> Mois [1]
-    // XX -> Jour [2]
-    // XX -> Heure de début [3]
-    // xxxx -> Durée de la séance en minute [4]
-    // xxxxxxxx -> Type du cours [5]
-
-// Filtre 1 : codeProf
-$filtre1 = [
-    [
-        0 => 1233443,
-        1 => '2020-03-24',
-        2 => '800',
-        3 => '60', // 130 signifie 1h30
-        4 => 'TD',
-        5 => 'Mathematiques',
-        6 => 'Toto',
-        7 => 'R10',
-        8 => [],
-        9 => 'salle-1'
-    ],
-    [
-        0 => 1233443,
-        1 => '2020-03-24',
-        2 => '800',
-        3 => '130', // 130 signifie 1h30
-        4 => 'TD',
-        5 => 'Mathematiques',
-        6 => 'Donald',
-        7 => 'R12',
-        8 => [],
-        9 => 'salle-1'
-    ],
-    [
-        0 => 1233443,
-        1 => '2020-03-24',
-        2 => '830',
-        3 => '100', // 130 signifie 1h30
-        4 => 'TD',
-        5 => 'Mathematiques',
-        6 => 'Donald',
-        7 => 'R12',
-        8 => [],
-        9 => 'salle-1'
-    ],
-    [
-        0 => 1233443,
-        1 => '2020-03-24',
-        2 => '1000',
-        3 => '100', // 130 signifie 1h30
-        4 => 'CM',
-        5 => 'Français',
-        6 => 'Donald',
-        7 => 'R12',
-        8 => [],
-        9 => 'salle-2'
-    ],
-
-];
+include ('data.php');
 
 $colors = [
     'COURS' => '#B5A9FB',
@@ -92,6 +33,8 @@ $colors = [
     'Autre' => '#1EFF1D',
     'Reservation' => '#FFFF01'
 ];
+
+/*
 
    $edt = New \Sebius77\WeeklyCalendarGeneration\cal\Day(8, 19);
 
@@ -104,7 +47,34 @@ $colors = [
    // ensuite on regroupe les sessions liées
     $result = $edt->bundleSession($userSessions);
     include('weekCalVertical.php');
+*/
+
+
+/**
+ * Nouvelle façon de faire
+ */
+
+$sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
+$day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
+$edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
+    '2020-03-24',
+    '2020-03-24',
+    8,
+    19,
+    $data,
+    1,
+    15,
+    [
+        'idHoursDiv' => 'hours',
+        'cssHourClass' => 'hour',
+    ],
+    $sessionManager,
+    $day
+);
+
+echo $edt->calendar();
 ?>
+
 
 </body>
 </html>

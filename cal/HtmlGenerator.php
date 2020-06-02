@@ -29,10 +29,10 @@ class HtmlGenerator
                 $top = $distance + ($newCoefficient*3);
             }
 
-            if ($orientation === 'V') {
+            if ($orientation === 1) {
                 $str .= '<div class="'. $options['seanceClass'] .'" style="width: '. $length . 'px; height:
                                '. $percent .'%; position: relative; left: ' . $top . 'px;">';
-            } else if ($orientation === 'H') {
+            } else if ($orientation === 0) {
                 $str .= '<div class="'. $options['seanceClass'] .'" style="width: '. $percent . '%; height:
                                '. $length .'px; position: relative; top: ' . $top . 'px;">';
             }
@@ -59,9 +59,9 @@ class HtmlGenerator
             // Longueur d'une séance en comptant les bordures (nbre de cell 15 px + 1 px)
             $length = $seance->getSessionLength() + (($coefficient - 1)*3);
 
-            if ($orientation === 'V') {
+            if ($orientation === 1) {
                 $str .= '<div class="'.$options['seanceClass'].'" style="width: '. $length. 'px; height: 100%; position: relative;">';
-            } else if ($orientation === 'H') {
+            } else if ($orientation === 0) {
                 $str .= '<div class="'.$options['seanceClass'].'" style="width: 100%; height: '.$length.'px; position: relative;">';
             }
 

@@ -118,24 +118,23 @@ class CalendarBuilder
      * @return string
      * @throws \Exception
      */
-    public function calendar() : string
+    public function weekCalendar() : string
     {
         $period = $this->getPeriod();
         $orientation = $this->orientation;
         $str = '';
 
-        if (($orientation === 0) || ($orientation === 1)) {
-            $str = $this->firstString();
-            $str .= $this->colHours();
-            foreach($period as $date)
-            {
-                $str .= $this->buildDay($date);
-            }
-            $str .= $this->endString();
+        $str = $this->firstString();
+        $str .= $this->colHours();
+        foreach($period as $date)
+        {
+            $str .= $this->buildDay($date);
         }
+        $str .= $this->endString();
+
         return $str;
     }
-
+    
     /**
      * @param $data
      * @return array

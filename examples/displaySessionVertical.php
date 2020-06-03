@@ -56,7 +56,7 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     $day
 );
 
-echo $edt->calendar();
+echo $edt->weekCalendar();
 ?>
 
 

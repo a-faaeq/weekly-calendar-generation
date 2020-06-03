@@ -50,7 +50,7 @@ class Day {
                       $sessionsNumber = count($groupSeance['sessions']);
 
                       // TODO : Ajout du design pattern Injection de dépendance sur les classes
-                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, 1);
+                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, 0);
                   }
             }
             $str .= '</div>';

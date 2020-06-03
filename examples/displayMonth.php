@@ -31,7 +31,7 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     8,
     19,
     $data,
-    0,
+    3,
     15,
     [
         'idHoursDiv' => 'hours',
@@ -41,7 +41,7 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     $day
 );
 
-echo $edt->weekCalendar();
+echo $edt->calendar();
 
 ?>
 </body>

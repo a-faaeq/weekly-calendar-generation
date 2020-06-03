@@ -114,16 +114,9 @@ class CalendarBuilder
         return '</div>';
     }
 
-    /**
-     * @return string
-     * @throws \Exception
-     */
     public function weekCalendar() : string
     {
         $period = $this->getPeriod();
-        $orientation = $this->orientation;
-        $str = '';
-
         $str = $this->firstString();
         $str .= $this->colHours();
         foreach($period as $date)
@@ -131,10 +124,35 @@ class CalendarBuilder
             $str .= $this->buildDay($date);
         }
         $str .= $this->endString();
-
         return $str;
     }
-    
+
+    public function monthCalendar() : string
+    {
+        $period = $this->getPeriod();
+        $str = '';
+        $first = false;
+
+        foreach ($period as $date) {
+            $formatDate = new \DateTime($date);
+            $day = $formatDate->format('w');
+
+            if ($day === "1") {
+                if ($first === true) {
+                    $str .= '</div>';
+                }
+                $str .= $this->firstString();
+                $str .= $this->colHours();
+                $str .= $this->buildDay($date);
+                $first = true;
+            } else if ($day !== "0" && $day !== "6"){
+                $str .= $this->buildDay($date);
+            }
+
+        }
+        return $str;
+    }
+
     /**
      * @param $data
      * @return array

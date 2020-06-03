@@ -26,8 +26,8 @@ include ('data.php');
 $sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
 $day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
-    '2020-03-24',
-    '2020-03-25',
+    '2020-06-01',
+    '2020-06-05',
     8,
     19,
     $data,

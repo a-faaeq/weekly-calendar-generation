@@ -34,22 +34,6 @@ $colors = [
     'Reservation' => '#FFFF01'
 ];
 
-/*
-
-   $edt = New \Sebius77\WeeklyCalendarGeneration\cal\Day(8, 19);
-
-   // On créé le tableau des sessions pour un jour et un filtre donné (utilisateur, groupe, salle...) donné.
-
-    $sessions = $edt->sessions($filtre1, $colors);
-
-   $userSessions = $edt->sessionTable($sessions, '2020-03-24');
-
-   // ensuite on regroupe les sessions liées
-    $result = $edt->bundleSession($userSessions);
-    include('weekCalVertical.php');
-*/
-
-
 /**
  * Nouvelle façon de faire
  */

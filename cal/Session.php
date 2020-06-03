@@ -4,16 +4,16 @@ namespace Sebius77\WeeklyCalendarGeneration\cal;
 
 class Session {
 
-    private $sessionCode; // CodeSeance
-    private $sessionDate; // DateSeance
-    private $sessionStartTime; // HeureSeance
-    private $sessionEndTime;
-    private $sessionLength; // DureeSeance
-    private $sessionType; // TypeSeance
-    private $sessionSubject; // MatiereSeance
-    private $sessionTeacher; // Prof
-    private $sessionRoom; // Salle
-    private $sessionGroups;
+    private $code; // CodeSeance
+    private $date; // DateSeance
+    private $startTime; // HeureSeance
+    private $endTime;
+    private $length; // DureeSeance
+    private $category; // TypeSeance
+    private $subject; // MatiereSeance
+    private $teacher; // Prof
+    private $room; // Salle
+    private $groups;
     private $previousSession;
     private $color;
     private $startTimeFormatHour;
@@ -23,74 +23,74 @@ class Session {
 
     public function __construct($data)
     {
-        $this->setSessionCode($data[0]);
-        $this->setSessionDate($data[1]);
-        $this->setSessionStartTime($data[2]);
-        $this->setSessionLength($data[3]);
-        $this->setSessionType($data[4]);
-        $this->setSessionSubject($data[5]);
+        $this->setCode($data[0]);
+        $this->setDate($data[1]);
+        $this->setStartTime($data[2]);
+        $this->setLength($data[3]);
+        $this->setCategory($data[4]);
+        $this->setSubject($data[5]);
         $this->setSubjectAlias($data[6]);
-        $this->setSessionTeacher($data[7]);
-        $this->setSessionRoom(($data[8]));
+        $this->setTeacher($data[7]);
+        $this->setRoom(($data[8]));
         $this->setRoomAlias($data[9]);
-        $this->setSessionEndTime($this->sessionStartTime + $this->sessionLength);
-        $this->setStartTimeFormatHour($this->sessionStartTime);
-        $this->setEndTimeFormatHour($this->sessionEndTime);
+        $this->setEndTime($this->startTime + $this->length);
+        $this->setStartTimeFormatHour($this->startTime);
+        $this->setEndTimeFormatHour($this->endTime);
     }
 
     /**
      * @return mixed
      */
-    public function getSessionStartTime()
+    public function getStartTime()
     {
-        return $this->sessionStartTime;
+        return $this->startTime;
     }
 
     /**
-     * @param mixed $sessionStartTime
+     * @param mixed $startTime
      */
-    public function setSessionStartTime($sessionStartTime)
+    public function setstartTime($startTime)
     {
-        $sessionStartTime = intval($sessionStartTime);
-        $nb = strlen($sessionStartTime);
+        $startTime = intval($startTime);
+        $nb = strlen($startTime);
 
         if ($nb <= 2) {
-            $this->sessionStartTime = $sessionStartTime;
+            $this->startTime = $startTime;
         } elseif ($nb === 3) {
-            $tmp = str_split($sessionStartTime);
+            $tmp = str_split($startTime);
             $hours = intval($tmp[0]);
             $min = intval($tmp[1] . $tmp[2]);
-            $this->sessionStartTime = ($hours * 60) + $min;
+            $this->startTime = ($hours * 60) + $min;
         } elseif ($nb === 4) {
-            $tmp = str_split($sessionStartTime);
+            $tmp = str_split($startTime);
             $hours = intval($tmp[0] . $tmp[1]);
             $min = intval($tmp[2] . $tmp[3]);
-            $this->sessionStartTime = ($hours * 60) + $min;
+            $this->startTime = ($hours * 60) + $min;
         }
     }
 
     /**
      * @return mixed
      */
-    public function getSessionEndTime()
+    public function getEndTime()
     {
-        return $this->sessionEndTime;
+        return $this->endTime;
     }
 
     /**
-     * @param mixed $sessionEndTime
+     * @param mixed $endTime
      */
-    public function setSessionEndTime($sessionEndTime)
+    public function setEndTime($endTime)
     {
-        $this->sessionEndTime = $sessionEndTime;
+        $this->endTime = $endTime;
     }
 
     /**
      * @return mixed
      */
-    public function getSessionLength()
+    public function getLength()
     {
-        return $this->sessionLength;
+        return $this->length;
     }
 
     /**
@@ -101,51 +101,49 @@ class Session {
     {
         $minTime = intval($minTime);
         $modulo = $minTime%60;
-
         if ($modulo === 0) {
             return intval($minTime/60) . 'h00';
         }
-
         return intval($minTime/60) . 'h' . $modulo;
     }
 
     /**
-     * @param mixed $sessionLength
+     * @param mixed $length
      */
-    public function setSessionLength($sessionLength)
+    public function setLength($length)
     {
-        $sessionLength = intval($sessionLength);
-        $nb = strlen($sessionLength);
+        $length = intval($length);
+        $nb = strlen($length);
 
         if ($nb <= 2) {
-            $this->sessionLength = $sessionLength;
+            $this->length = $length;
         } elseif ($nb === 3) {
-            $tmp = str_split($sessionLength);
+            $tmp = str_split($length);
             $hours = intval($tmp[0]);
             $min = intval($tmp[1] . $tmp[2]);
-            $this->sessionLength = ($hours * 60) + $min;
+            $this->length = ($hours * 60) + $min;
         } elseif ($nb === 4) {
-            $tmp = str_split($sessionLength);
+            $tmp = str_split($length);
             $hours = intval($tmp[0] . $tmp[1]);
             $min = intval($tmp[2] . $tmp[3]);
-            $this->sessionLength = ($hours * 60) + $min;
+            $this->length = ($hours * 60) + $min;
         }
     }
 
     /**
      * @return mixed
      */
-    public function getSessionType()
+    public function getCategory()
     {
-        return $this->sessionType;
+        return $this->category;
     }
 
     /**
-     * @param mixed $sessionType
+     * @param mixed $category
      */
-    public function setSessionType($sessionType)
+    public function setCategory($category)
     {
-        $this->sessionType = $sessionType;
+        $this->category = $category;
     }
 
     /**
@@ -167,99 +165,99 @@ class Session {
     /**
      * @return mixed
      */
-    public function getSessionCode()
+    public function getCode()
     {
-        return $this->sessionCode;
+        return $this->code;
     }
 
     /**
-     * @param mixed $sessionCode
+     * @param mixed $code
      */
-    public function setSessionCode($sessionCode): void
+    public function setCode($code): void
     {
-        $this->sessionCode = $sessionCode;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSessionDate()
-    {
-        return $this->sessionDate;
-    }
-
-    /**
-     * @param mixed $sessionDate
-     */
-    public function setSessionDate($sessionDate): void
-    {
-        $tmp = explode('-', $sessionDate);
-        $sessionDate = intval($tmp[0] . '-' . intval($tmp[1]) . '-' . intval($tmp[2]));
-        $this->sessionDate = $sessionDate;
+        $this->code = $code;
     }
 
     /**
      * @return mixed
      */
-    public function getSessionSubject()
+    public function getDate()
     {
-        return $this->sessionSubject;
+        return $this->date;
     }
 
     /**
-     * @param mixed $sessionSubject
+     * @param mixed $date
      */
-    public function setSessionSubject($sessionSubject): void
+    public function setDate($date): void
     {
-        $this->sessionSubject = $sessionSubject;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSessionTeacher()
-    {
-        return $this->sessionTeacher;
-    }
-
-    /**
-     * @param mixed $sessionTeacher
-     */
-    public function setSessionTeacher($sessionTeacher): void
-    {
-        $this->sessionTeacher = $sessionTeacher;
+        $tmp = explode('-', $date);
+        $date = intval($tmp[0] . '-' . intval($tmp[1]) . '-' . intval($tmp[2]));
+        $this->date = $date;
     }
 
     /**
      * @return mixed
      */
-    public function getSessionRoom()
+    public function getSubject()
     {
-        return $this->sessionRoom;
+        return $this->subject;
     }
 
     /**
-     * @param mixed $sessionRoom
+     * @param mixed $subject
      */
-    public function setSessionRoom($sessionRoom): void
+    public function setSubject($subject): void
     {
-        $this->sessionRoom = $sessionRoom;
+        $this->subject = $subject;
     }
 
     /**
      * @return mixed
      */
-    public function getSessionGroups()
+    public function getTeacher()
     {
-        return $this->sessionGroups;
+        return $this->teacher;
     }
 
     /**
-     * @param mixed $sessionGroups
+     * @param mixed $teacher
      */
-    public function setSessionGroups($sessionGroups): void
+    public function setTeacher($teacher): void
     {
-        $this->sessionGroups[] = $sessionGroups;
+        $this->teacher = $teacher;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
+     * @param mixed $room
+     */
+    public function setRoom($room): void
+    {
+        $this->room = $room;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroups()
+    {
+        return $this->groups;
+    }
+
+    /**
+     * @param mixed $groups
+     */
+    public function setGroups($groups): void
+    {
+        $this->groups[] = $groups;
     }
 
     /**
@@ -275,7 +273,7 @@ class Session {
      */
     public function setColor(array $colors): void
     {
-        $type = $this->getSessionType();
+        $type = $this->getCategory();
 
         foreach ($colors as $key=>$color)
         {

@@ -21,18 +21,13 @@ require '../cal/CalendarBuilder.php';
 require '../cal/SessionManager.php';
 require '../cal/HtmlGenerator.php';
 require '../cal/Filter.php';
-
 include ('data.php');
-
-/**
- * Nouvelle façon de faire
- */
 
 $sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
 $day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     '2020-03-24',
-    '2020-03-24',
+    '2020-03-25',
     8,
     19,
     $data,

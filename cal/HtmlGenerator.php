@@ -11,9 +11,9 @@ class HtmlGenerator
     // Dans le cas ou il y aurait plus d'une session sur le même créneau
     if ($sessionsNumber > 1) {
         $percent = 100 / $sessionsNumber; // Pour déterminer la taille (hauteur ou largeur selon l'orientation) d'une séance
-        if ($orientation === 'V') {
+        if ($orientation === 1) {
             $str .='<div class="groupSeanceV">';
-        } else if ($orientation === 'H') {
+        } else if ($orientation === 0) {
             $str .='<div class="groupSeance">';
         }
 

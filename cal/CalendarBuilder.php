@@ -2,8 +2,6 @@
 
 namespace Sebius77\WeeklyCalendarGeneration\cal;
 
-use Sebius77\WeeklyCalendarGeneration\cal\Filter;
-
 class CalendarBuilder
 {
     private $startDate; // Date début du calendrier (Datetime)
@@ -25,6 +23,7 @@ class CalendarBuilder
     ];
     private $sessionManager;
     private $day;
+    private $period;
 
     public function __construct(
         $startDate,
@@ -49,7 +48,7 @@ class CalendarBuilder
         $this->cssOption = $cssOption; // Tableau des class et id pour le css
         $this->sessionManager = $sessionManager;
         $this->day = $day;
-
+        $this->setPeriod($startDate, $endDate);
     }
 
     /**
@@ -58,6 +57,7 @@ class CalendarBuilder
      */
     public function colHours() : string
     {
+        $str = '';
         if ($this->orientation === 0) {
             $str = '<div id="'. $this->cssOption['idHoursDiv'] .'">';
         } elseif ($this->orientation === 1) {
@@ -95,7 +95,6 @@ class CalendarBuilder
             if ($this->orientation === 1) {
                 $str .= '</span>';
             }
-
             $startTime += 15;
         }
         $str .= '</div>';
@@ -115,13 +114,25 @@ class CalendarBuilder
         return '</div>';
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function calendar() : string
     {
-        $str = $this->firstString();
-        $str .= $this->colHours();
-        $str .= $this->buildDay();
-        $str .= $this->endString();
+        $period = $this->getPeriod();
+        $orientation = $this->orientation;
+        $str = '';
 
+        if (($orientation === 0) || ($orientation === 1)) {
+            $str = $this->firstString();
+            $str .= $this->colHours();
+            foreach($period as $date)
+            {
+                $str .= $this->buildDay($date);
+            }
+            $str .= $this->endString();
+        }
         return $str;
     }
 
@@ -132,7 +143,6 @@ class CalendarBuilder
      */
     public function setData($data): array
     {
-
         $filters = [];
         foreach ($data as $element) {
             $filter = $element['filter'];
@@ -140,73 +150,67 @@ class CalendarBuilder
             $category = $tabFilter[0];
             $code = $tabFilter[1];
             $name = $element['filterName'];
-
             $tabSessions = [];
             $sessions = $element['sessions'];
             foreach ($sessions as $session)
             {
                 $sessionObject = new Session($session);
                 $sessionObject->setColor($this->colors);
-
                 $tabSessions[] = $sessionObject;
             }
-
             $filterObject = new \Sebius77\WeeklyCalendarGeneration\cal\Filter($category, $code, $name, $tabSessions);
-
             $filters[] = $filterObject;
         }
         return $filters;
     }
 
     /**
-     * Méthode de test
+     * @param $date
+     * @return string
+     * @throws \Exception
+     * Méthode permettant de générer un jour en fonction d'une date et des données récupérées par rapport à cette date
      */
-    public function buildDay()
+    public function buildDay($date)
     {
-        $date = '2020-03-24';
         $str = '';
+        $formatDate = new \DateTime($date);
+        $month = $formatDate->format('m');
+        $day = $formatDate->format('d');
 
         if ($this->orientation === 0) {
-            $str = '<div id="monday" class="day">';
-            $str .= '<div class="title" id="monday-title">Lundi</div>';
+            $str = '<div class="day">';
+            $str .= '<div class="title">' . $day . '/'. $month . '</div>';
         }
-
         if ($this->orientation === 1) {
-            $str = '<div id="monday" class="dayV">';
-            $str .= '<div class="title-vertical" id="monday-title">Lundi</div>';
+            $str = '<div class="dayV">';
+            $str .= '<div class="title-vertical">' . $day . '/'. $month . '</div>';
         }
-
         foreach ($this->getData() as $filter) {
             if ($this->orientation === 0) {
-                $str .= '<div class="title" id="monday-filter-1">'. $filter->getName() .'</div>';
+                $str .= '<div class="title">'. $filter->getName() .'</div>';
             }
-
             if ($this->orientation === 1) {
-                $str .= '<div class="title-vertical" id="monday-filter-1">'. $filter->getName() .'</div>';
+                $str .= '<div class="title-vertical">'. $filter->getName() .'</div>';
             }
-
             $sessions = $filter->getSessions();
-
             $daySessions = $this->sessionManager->sessionTable($sessions, $date);
             $groupSession = $this->sessionManager->bundleSession($daySessions);
-
             if ($this->orientation === 0) {
-                $str .= $this->day->buildDay($groupSession,  $options = [
+                $str .= $this->day->buildSessions($groupSession,  $options = [
                     'cellClass' => 'cell',
                     'seanceClass' => 'seance',
                     'seanceTitleClass' => 'seance-title'
                 ]);
             }
-
             if ($this->orientation === 1) {
-                $str .= $this->day->buildDay($groupSession,  $options = [
+                $str .= $this->day->buildSessions($groupSession,  $options = [
                     'cellClass' => 'cellV',
                     'seanceClass' => 'seanceV',
                     'seanceTitleClass' => 'seance-title'
                 ]);
             }
-
         }
+        $str .= '</div>';
         return $str;
     }
 
@@ -216,5 +220,36 @@ class CalendarBuilder
     public function getData(): array
     {
         return $this->data;
+    }
+
+    public function getPeriod()
+    {
+        return $this->period;
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     * @throws \Exception
+     */
+    public function setPeriod($startDate, $endDate)
+    {
+        $this->period = [$startDate];
+        $start = new \DateTime($startDate);
+        $end = new \DateTime($endDate);
+
+        while ($start != $end) {
+            $start->modify('+1 day');
+
+            $year = $start->format('Y');
+            $month = $start->format('m');
+            $day = $start->format('d');
+
+            $string = $year . '-' . $month . '-' . $day;
+
+            $this->period[] = $string;
+        }
+        return $this->period;
     }
 }

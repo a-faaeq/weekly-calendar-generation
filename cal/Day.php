@@ -23,7 +23,7 @@ class Day {
      * @param array $options
      * @return string
      */
-    public function buildDay(
+    public function buildSessions(
         array $day,
         array $options = [
             'cellClass' => null,
@@ -48,7 +48,9 @@ class Day {
                   if ($i === $groupSeance['firstHour'] ) {
                       // On compte le nombre de séance qui se chevauche
                       $sessionsNumber = count($groupSeance['sessions']);
-                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, 1);
+
+                      // TODO : Ajout du design pattern Injection de dépendance sur les classes
+                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, 0);
                   }
             }
             $str .= '</div>';

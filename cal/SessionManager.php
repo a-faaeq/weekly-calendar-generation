@@ -18,14 +18,14 @@ class SessionManager
     public function sessionCompare(Session $sessionA, Session $sessionB)
     {
         if (
-            ($sessionB->getSessionEndTime() > $sessionA->getSessionStartTime() &&
-                $sessionB->getSessionStartTime() <= $sessionA->getSessionStartTime())
+            ($sessionB->getEndTime() > $sessionA->getStartTime() &&
+                $sessionB->getStartTime() <= $sessionA->getStartTime())
             ||
-            ($sessionB->getSessionStartTime() < $sessionA->getSessionEndTime() &&
-                $sessionB->getSessionEndTime() >= $sessionA->getSessionEndTime())
+            ($sessionB->getStartTime() < $sessionA->getEndTime() &&
+                $sessionB->getEndTime() >= $sessionA->getEndTime())
             ||
-            ($sessionB->getSessionStartTime() >= $sessionA->getSessionStartTime() &&
-                $sessionB->getSessionEndTime() <= $sessionA->getSessionEndTime())
+            ($sessionB->getStartTime() >= $sessionA->getStartTime() &&
+                $sessionB->getEndTime() <= $sessionA->getEndTime())
         ) {
             return true;
         }
@@ -53,13 +53,10 @@ class SessionManager
      */
     public function sessionTable(array $sessions, $day)
     {
-        $dayTab = explode('-', $day);
-        $day = intval($dayTab[0] . '-' . intval($dayTab[1]) . '-' . intval($dayTab[2]));
-
         $sessionTable = [];
         // On parcourt le tableau utilisateur pour récupérer uniquement les séances correspondant au jour donné
         foreach ($sessions as $session) {
-            if ($day === $session->getSessionDate()) {
+            if ($day === $session->getDate()) {
                 $sessionTable[] = $session;
             }
         }
@@ -152,11 +149,11 @@ class SessionManager
     {
         $tmp = $tab;
         $firstElt = array_shift($tmp);
-        $firstHour = $firstElt->getSessionStartTime();
+        $firstHour = $firstElt->getStartTime();
 
         foreach ($tmp as $elt) {
-            if ($elt->getSessionStartTime() < $firstHour) {
-                $firstHour = $elt->getSessionStartTime();
+            if ($elt->getStartTime() < $firstHour) {
+                $firstHour = $elt->getStartTime();
             }
         }
         return $firstHour;
@@ -170,11 +167,11 @@ class SessionManager
     {
         $tmp = $tab;
         $firstElt = array_shift($tmp);
-        $lastHour = $firstElt->getSessionEndTime();
+        $lastHour = $firstElt->getEndTime();
 
         foreach ($tmp as $elt) {
-            if ($elt->getSessionEndTime() > $lastHour) {
-                $lastHour = $elt->getSessionEndTime();
+            if ($elt->getEndTime() > $lastHour) {
+                $lastHour = $elt->getEndTime();
             }
         }
         return $lastHour;

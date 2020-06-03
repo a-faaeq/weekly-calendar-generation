@@ -191,8 +191,6 @@ class Session {
      */
     public function setDate($date): void
     {
-        $tmp = explode('-', $date);
-        $date = intval($tmp[0] . '-' . intval($tmp[1]) . '-' . intval($tmp[2]));
         $this->date = $date;
     }
 

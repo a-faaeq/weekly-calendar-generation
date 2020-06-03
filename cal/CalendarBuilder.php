@@ -192,7 +192,9 @@ class CalendarBuilder
             if ($this->orientation === 1) {
                 $str .= '<div class="title-vertical">'. $filter->getName() .'</div>';
             }
+            // Récupération de toutes les séances
             $sessions = $filter->getSessions();
+
             $daySessions = $this->sessionManager->sessionTable($sessions, $date);
             $groupSession = $this->sessionManager->bundleSession($daySessions);
             if ($this->orientation === 0) {

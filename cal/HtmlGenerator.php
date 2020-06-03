@@ -19,12 +19,12 @@ class HtmlGenerator
 
         foreach($groupSeance['sessions'] as $seance) {
             $indexSession += 1;
-            $coefficient = $seance->getSessionLength() / 15;
-            $length = $seance->getSessionLength() + (($coefficient - 1)*3);
+            $coefficient = $seance->getLength() / 15;
+            $length = $seance->getLength() + (($coefficient - 1)*3);
 
-            $top = $distance = $seance->getSessionStartTime() - $firstHour;
-            if (($seance->getSessionStartTime() - $firstHour) > 0) {
-                $distance = $seance->getSessionStartTime() - $firstHour;
+            $top = $distance = $seance->getStartTime() - $firstHour;
+            if (($seance->getStartTime() - $firstHour) > 0) {
+                $distance = $seance->getStartTime() - $firstHour;
                 $newCoefficient = $distance / 15;
                 $top = $distance + ($newCoefficient*3);
             }
@@ -38,14 +38,14 @@ class HtmlGenerator
             }
 
             $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor().';">'
-                . '<span>' . $seance->getSessionType() . '</span><br/>'
+                . '<span>' . $seance->getCategory() . '</span><br/>'
                 . '<span>' . $seance->getStartTimeFormatHour() .'</span>'
                 . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                 . '</div>'
 
                 . '<div class="seance-content">'
                 . '<div>' . $seance->getSubjectAlias() . '</div>'
-                . '<div>' . $seance->getSessionTeacher() . '</div>'
+                . '<div>' . $seance->getTeacher() . '</div>'
                 . '<div>' . $seance->getRoomAlias() . '</div>'
                 . '</div>'
             ;
@@ -55,9 +55,9 @@ class HtmlGenerator
         // Cas ou il n' y a pas de sessions regroupées
     } else {
         foreach($groupSeance['sessions'] as $seance) {
-            $coefficient = $seance->getSessionLength() / 15;
+            $coefficient = $seance->getLength() / 15;
             // Longueur d'une séance en comptant les bordures (nbre de cell 15 px + 1 px)
-            $length = $seance->getSessionLength() + (($coefficient - 1)*3);
+            $length = $seance->getLength() + (($coefficient - 1)*3);
 
             if ($orientation === 1) {
                 $str .= '<div class="'.$options['seanceClass'].'" style="width: '. $length. 'px; height: 100%; position: relative;">';
@@ -66,13 +66,13 @@ class HtmlGenerator
             }
 
             $str .= '<div class="'. $options['seanceTitleClass'] .'" style="position: relative; background-color: '. $seance->getColor() .';">'
-                . '<span>' .$seance->getSessionType() . '</span>'
+                . '<span>' .$seance->getCategory() . '</span>'
                 . '<span>' . $seance->getStartTimeFormatHour() .'</span>-'
                 . '<span>' . $seance->getEndTimeFormatHour() .'</span>'
                 . '</div>'
                 . '<div class="seance-content">'
                 . '<div>' . $seance->getSubjectAlias() . '</div>'
-                . '<div>' . $seance->getSessionTeacher() . '</div>'
+                . '<div>' . $seance->getTeacher() . '</div>'
                 . '<div>' . $seance->getRoomAlias() . '</div>'
                 . '</div>'
             ;

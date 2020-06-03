@@ -70,16 +70,6 @@ class Filter
      */
     public function getSessions()
     {
-        $dateSession = [];
-
-
-        foreach ($this->sessions as $session) {
-            var_dump($session->getDate());
-            die('test de fonctionnement');
-
-        }
-
-
         return $this->sessions;
     }
 

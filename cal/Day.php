@@ -8,13 +8,15 @@ class Day {
     private $endTimeDay; // end time of day in hour
     private $htmlGenerator;
     private $sessionManager;
+    private $orientation;
 
-    public function __construct($startTimeDay, $endTimeDay, HtmlGenerator $htmlGenerator, SessionManager $sessionManager)
+    public function __construct($startTimeDay, $endTimeDay, $orientation)
     {
         $this->setStartTimeDay($startTimeDay*60);
         $this->setEndTimeDay($endTimeDay*60);
-        $this->htmlGenerator = $htmlGenerator;
-        $this->sessionManager = $sessionManager;
+        $this->htmlGenerator = new HtmlGenerator();
+        $this->sessionManager = new SessionManager();
+        $this->orientation = $orientation;
     }
 
     /**
@@ -48,9 +50,7 @@ class Day {
                   if ($i === $groupSeance['firstHour'] ) {
                       // On compte le nombre de séance qui se chevauche
                       $sessionsNumber = count($groupSeance['sessions']);
-
-                      // TODO : Ajout du design pattern Injection de dépendance sur les classes
-                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, 0);
+                      $str .= $this->htmlGenerator->generateString($sessionsNumber, $groupSeance, $options, $this->orientation);
                   }
             }
             $str .= '</div>';

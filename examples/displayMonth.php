@@ -23,8 +23,6 @@ require '../cal/HtmlGenerator.php';
 require '../cal/Filter.php';
 include ('data.php');
 
-$sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
-$day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     '2020-06-01',
     '2020-06-30',
@@ -37,8 +35,8 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
         'idHoursDiv' => 'hours',
         'cssHourClass' => 'hour',
     ],
-    $sessionManager,
-    $day
+    new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager(),
+    new Day(8, 19, 0)
 );
 
 echo $edt->monthCalendar();

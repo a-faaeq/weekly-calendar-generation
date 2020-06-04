@@ -38,8 +38,6 @@ $colors = [
  * Nouvelle façon de faire
  */
 
-$sessionManager = new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager();
-$day = new Day(8, 19, new HtmlGenerator(), $sessionManager);
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     '2020-03-24',
     '2020-03-28',
@@ -52,8 +50,8 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
         'idHoursDiv' => 'hours',
         'cssHourClass' => 'hour',
     ],
-    $sessionManager,
-    $day
+    new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager(),
+    new Day(8, 19, 1)
 );
 
 echo $edt->weekCalendar();

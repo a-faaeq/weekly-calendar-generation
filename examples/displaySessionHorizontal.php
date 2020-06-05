@@ -23,6 +23,7 @@ require '../cal/HtmlGenerator.php';
 require '../cal/Filter.php';
 include ('data.php');
 
+
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     new DateTime('2020-06-01'),
     new DateTime('2020-06-05'),

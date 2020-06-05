@@ -25,6 +25,20 @@ class CalendarBuilder
     private $day;
     private $period;
 
+    /**
+     * CalendarBuilder constructor.
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
+     * @param $startTime
+     * @param $endTime
+     * @param array $data
+     * @param $orientation
+     * @param $cellSize
+     * @param $cssOption
+     * @param SessionManager $sessionManager
+     * @param Day $day
+     * @throws \Exception
+     */
     public function __construct(
         \DateTime $startDate,
         \DateTime $endDate,
@@ -164,6 +178,7 @@ class CalendarBuilder
     /**
      * @param $data
      * @return array
+     * @throws \Exception
      * Méthode permettant d'hydrater les objets filtres avec leur séances avec les données reçues
      */
     public function setData($data): array

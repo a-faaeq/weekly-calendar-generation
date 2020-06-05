@@ -21,10 +21,15 @@ class Session {
     private $subjectAlias;
     private $roomAlias;
 
+    /**
+     * Session constructor.
+     * @param $data
+     * @throws \Exception
+     */
     public function __construct($data)
     {
         $this->setCode($data[0]);
-        $this->setDate($data[1]);
+        $this->setDate(new \DateTime($data[1]));
         $this->setStartTime($data[2]);
         $this->setLength($data[3]);
         $this->setCategory($data[4]);
@@ -190,9 +195,9 @@ class Session {
      * @param $date
      * @throws \Exception
      */
-    public function setDate($date): void
+    public function setDate(\DateTime $date): void
     {
-        $this->date = new \DateTime($date);
+        $this->date = $date;
     }
 
     /**

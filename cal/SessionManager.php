@@ -56,7 +56,7 @@ class SessionManager
         $sessionTable = [];
         // On parcourt le tableau utilisateur pour récupérer uniquement les séances correspondant au jour donné
         foreach ($sessions as $session) {
-            if ($day === $session->getDate()) {
+            if ($day == $session->getDate()) {
                 $sessionTable[] = $session;
             }
         }
@@ -94,7 +94,6 @@ class SessionManager
                     $sessionToCompare->setPreviousSession($session);
                 }
             }
-
             // 2ème vérification : On compare de nouveau sauf dans le cas ou nous avons déjà effectué une comparaison
             if (isset($result[$i])) {
                 foreach ($result[$i] as $tab) {

@@ -257,14 +257,13 @@ class CalendarBuilder
      * @param $startDate
      * @param $endDate
      * @return array
-     * @throws \Exception
      * permet d'obtenir un tableau des jours
      */
     public function setPeriod(\DateTime $startDate, \DateTime $endDate)
     {
         $this->period = [$startDate];
 
-        while ($startDate != $endDate) {
+        while ($startDate !== $endDate) {
             $startDate->modify('+1 day');
 
             $this->period[] = $startDate;

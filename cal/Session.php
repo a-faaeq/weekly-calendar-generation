@@ -187,11 +187,12 @@ class Session {
     }
 
     /**
-     * @param mixed $date
+     * @param $date
+     * @throws \Exception
      */
     public function setDate($date): void
     {
-        $this->date = $date;
+        $this->date = new \DateTime($date);
     }
 
     /**

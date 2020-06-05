@@ -263,7 +263,7 @@ class CalendarBuilder
     {
         $this->period = [$startDate];
 
-        while ($startDate !== $endDate) {
+        while ($startDate != $endDate) {
             $startDate->modify('+1 day');
 
             $this->period[] = $startDate;

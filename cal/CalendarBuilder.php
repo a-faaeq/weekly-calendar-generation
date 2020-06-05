@@ -11,16 +11,8 @@ class CalendarBuilder
     private $data; // Tableau des résultats de filtres (nom du filtre, séances ...)
     private $orientation; // Vue du calendrier (0: horizontal, 1: vertical, 2: mensuel)
     private $cellSize; // Taille d'une cellule
-    private $cssOption;
-    private $colors = [
-        'COURS' => '#B5A9FB',
-        'TD' => '#F9FDA8',
-        'TP' => '#A9FCAE',
-        'DS' => '#FDA9A9',
-        'Projet' => '#FFC800',
-        'Autre' => '#1EFF1D',
-        'Reservation' => '#FFFF01'
-    ];
+    private $cssOptions;
+    private $colors;
     private $sessionManager;
     private $day;
     private $period;
@@ -34,7 +26,7 @@ class CalendarBuilder
      * @param array $data
      * @param $orientation
      * @param $cellSize
-     * @param $cssOption
+     * @param $cssOptions
      * @throws \Exception
      */
     public function __construct(
@@ -45,20 +37,21 @@ class CalendarBuilder
         array $data,
         $orientation,
         $cellSize,
-        $cssOption
+        $cssOptions
     )
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->startTime = $startTime;
         $this->endTime = $endTime;
-        $this->data = $this->setData($data);
         $this->orientation = $orientation;
         $this->cellSize = $cellSize;
-        $this->cssOption = $cssOption; // Tableau des class et id pour le css
+        $this->setCssOptions($cssOptions); // Tableau des class et id pour le css
         $this->sessionManager = New SessionManager();
         $this->day = new Day($startTime, $endTime, $orientation);
         $this->setPeriod($startDate, $endDate);
+        $this->setColors();
+        $this->data = $this->setData($data);
     }
 
     /**
@@ -69,7 +62,7 @@ class CalendarBuilder
     {
         $str = '';
         if ($this->orientation === 0) {
-            $str = '<div id="'. $this->cssOption['idHoursDiv'] .'">';
+            $str = '<div id="'. $this->cssOptions['idHoursDiv'] .'">';
         } elseif ($this->orientation === 1) {
             $str = '<div>';
             $str .= '<span class="hourV"></span><span class="hourV"></span>';
@@ -84,7 +77,7 @@ class CalendarBuilder
 
         for ($i = 0; $i < ($cellNumber +1); $i++) {
             if ($this->orientation === 0) {
-                $str.= '<div class="' . $this->cssOption['cssHourClass'] . '">';
+                $str.= '<div class="' . $this->cssOptions['cssHourClass'] . '">';
                 $str .= '<span>';
             }
 
@@ -188,6 +181,7 @@ class CalendarBuilder
             $name = $element['filterName'];
             $tabSessions = [];
             $sessions = $element['sessions'];
+
             foreach ($sessions as $session)
             {
                 $sessionObject = new Session($session);
@@ -281,5 +275,34 @@ class CalendarBuilder
             $this->period[] = $newDate;
         }
         return $this->period;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColors()
+    {
+        return $this->colors;
+    }
+
+    /**
+     * @param mixed $colors
+     */
+    public function setColors(): void
+    {
+        $this->colors = (isset($this->getCssOptions()['colors'])) ? $this->getCssOptions()['colors'] : null;
+    }
+
+    public function setCssOptions($cssOptions): void
+    {
+        $this->cssOptions = $cssOptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCssOptions()
+    {
+        return $this->cssOptions;
     }
 }

@@ -1,4 +1,17 @@
 <?php
+
+
+$colors = [
+    'COURS' => '#B5A9FB',
+    'TD' => '#F9FDA8',
+    'TP' => '#A9FCAE',
+    'DS' => '#FDA9A9',
+    'Projet' => '#FFC800',
+    'Autre' => '#1EFF1D',
+    'Reservation' => '#FFFF01'
+];
+
+
 // Traitement via le filtre en fonction de la catégorie (prof), du code (12345) et de la ou des dates.
 // ------------- Première requête --------------------
 // On récupère le nom du filtre (nom de l'enseignant si catégorie prof, nom du groupe si groupe, nom de la salle si salle)

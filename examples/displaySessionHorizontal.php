@@ -24,6 +24,7 @@ require '../cal/Filter.php';
 include ('data.php');
 
 
+
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     new DateTime('2020-06-01'),
     new DateTime('2020-06-05'),
@@ -35,6 +36,8 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     [
         'idHoursDiv' => 'hours',
         'cssHourClass' => 'hour',
+        'colors' => $colors
+
     ]
 );
 

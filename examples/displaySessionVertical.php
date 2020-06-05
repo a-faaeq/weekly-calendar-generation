@@ -24,15 +24,6 @@ require '../cal/Filter.php';
 
 include ('data.php');
 
-$colors = [
-    'COURS' => '#B5A9FB',
-    'TD' => '#F9FDA8',
-    'TP' => '#A9FCAE',
-    'DS' => '#FDA9A9',
-    'Projet' => '#FFC800',
-    'Autre' => '#1EFF1D',
-    'Reservation' => '#FFFF01'
-];
 
 /**
  * Nouvelle façon de faire
@@ -49,6 +40,7 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     [
         'idHoursDiv' => 'hours',
         'cssHourClass' => 'hour',
+        'colors' => $colors
     ]
 );
 

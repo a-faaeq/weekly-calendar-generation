@@ -195,12 +195,11 @@ class CalendarBuilder
      * @throws \Exception
      * Méthode permettant de générer un jour en fonction d'une date et des données récupérées par rapport à cette date
      */
-    public function buildDay($date)
+    public function buildDay(\DateTime $date)
     {
         $str = '';
-        $formatDate = new \DateTime($date);
-        $month = $formatDate->format('m');
-        $day = $formatDate->format('d');
+        $month = $date->format('m');
+        $day = $date->format('d');
 
         if ($this->orientation === 0) {
             $str = '<div class="day">';

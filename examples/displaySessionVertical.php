@@ -39,8 +39,8 @@ $colors = [
  */
 
 $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
-    '2020-03-24',
-    '2020-03-28',
+    new DateTime('2020-03-24'),
+    new DateTime('2020-03-28'),
     8,
     19,
     $data,

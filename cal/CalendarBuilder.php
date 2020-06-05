@@ -261,12 +261,13 @@ class CalendarBuilder
      */
     public function setPeriod(\DateTime $startDate, \DateTime $endDate)
     {
+
+        $interval = intval($startDate->diff($endDate)->format('%a'));
         $this->period = [$startDate];
 
-        while ($startDate != $endDate) {
-            $startDate->modify('+1 day');
-
-            $this->period[] = $startDate;
+        for ($i=1; $i <= $interval; $i++) {
+            $newDate = (clone $startDate)->modify('+' . $i . ' days');
+            $this->period[] = $newDate;
         }
         return $this->period;
     }

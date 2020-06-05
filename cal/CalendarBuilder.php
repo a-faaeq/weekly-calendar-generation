@@ -35,8 +35,6 @@ class CalendarBuilder
      * @param $orientation
      * @param $cellSize
      * @param $cssOption
-     * @param SessionManager $sessionManager
-     * @param Day $day
      * @throws \Exception
      */
     public function __construct(
@@ -47,9 +45,7 @@ class CalendarBuilder
         array $data,
         $orientation,
         $cellSize,
-        $cssOption,
-        SessionManager $sessionManager,
-        Day $day
+        $cssOption
     )
     {
         $this->startDate = $startDate;
@@ -60,8 +56,8 @@ class CalendarBuilder
         $this->orientation = $orientation;
         $this->cellSize = $cellSize;
         $this->cssOption = $cssOption; // Tableau des class et id pour le css
-        $this->sessionManager = $sessionManager;
-        $this->day = $day;
+        $this->sessionManager = New SessionManager();
+        $this->day = new Day($startTime, $endTime, $orientation);
         $this->setPeriod($startDate, $endDate);
     }
 

@@ -49,9 +49,7 @@ $edt = new \Sebius77\WeeklyCalendarGeneration\cal\CalendarBuilder(
     [
         'idHoursDiv' => 'hours',
         'cssHourClass' => 'hour',
-    ],
-    new \Sebius77\WeeklyCalendarGeneration\cal\SessionManager(),
-    new Day(8, 19, 1)
+    ]
 );
 
 echo $edt->weekCalendar();

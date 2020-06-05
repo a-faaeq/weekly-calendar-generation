@@ -35,6 +35,7 @@ class SessionManager
     /**
      * @param array $data
      * @return array
+     * @throws \Exception
      */
     public function sessions(array $data) {
         $sessions = [];

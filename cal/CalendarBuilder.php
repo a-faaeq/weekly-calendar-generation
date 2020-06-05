@@ -26,8 +26,8 @@ class CalendarBuilder
     private $period;
 
     public function __construct(
-        $startDate,
-        $endDate,
+        \DateTime $startDate,
+        \DateTime $endDate,
         $startTime,
         $endTime,
         array $data,
@@ -114,6 +114,10 @@ class CalendarBuilder
         return '</div>';
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function weekCalendar() : string
     {
         $period = $this->getPeriod();
@@ -127,6 +131,10 @@ class CalendarBuilder
         return $str;
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function monthCalendar() : string
     {
         $period = $this->getPeriod();
@@ -251,23 +259,16 @@ class CalendarBuilder
      * @param $endDate
      * @return array
      * @throws \Exception
+     * permet d'obtenir un tableau des jours
      */
-    public function setPeriod($startDate, $endDate)
+    public function setPeriod(\DateTime $startDate, \DateTime $endDate)
     {
         $this->period = [$startDate];
-        $start = new \DateTime($startDate);
-        $end = new \DateTime($endDate);
 
-        while ($start != $end) {
-            $start->modify('+1 day');
+        while ($startDate != $endDate) {
+            $startDate->modify('+1 day');
 
-            $year = $start->format('Y');
-            $month = $start->format('m');
-            $day = $start->format('d');
-
-            $string = $year . '-' . $month . '-' . $day;
-
-            $this->period[] = $string;
+            $this->period[] = $startDate;
         }
         return $this->period;
     }

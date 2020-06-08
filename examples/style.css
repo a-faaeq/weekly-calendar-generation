@@ -2,7 +2,6 @@
     height: 20px;
     border: 1px solid;
     margin: 1px;
-    width: 300px;
 }
 
 .title-vertical {
@@ -103,6 +102,12 @@
 
 .seance-title {
     padding: 1px;
-
 }
 
+.filters {
+    display: flex;
+}
+
+.filter-vertical {
+    display: flex;
+}

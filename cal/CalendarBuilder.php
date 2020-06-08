@@ -207,18 +207,25 @@ class CalendarBuilder
         $day = $date->format('d');
 
         if ($this->orientation === 0) {
-            $str = '<div class="day">';
-            $str .= '<div class="title">' . $day . '/'. $month . '</div>';
+            $str .= '<div class="day">';
+            $str .= '<div class="title" style="width: 99%">' . $day . '/'. $month . '</div>';
+            $str .= '<div class="filters">';
         }
+
         if ($this->orientation === 1) {
-            $str = '<div class="dayV">';
+            $str .= '<div class="dayV">';
             $str .= '<div class="title-vertical">' . $day . '/'. $month . '</div>';
+            $str .= '<div>';
         }
+
         foreach ($this->getData() as $filter) {
+
             if ($this->orientation === 0) {
+                $str .= '<div>';
                 $str .= '<div class="title">'. $filter->getName() .'</div>';
             }
             if ($this->orientation === 1) {
+                $str.= '<div class="filter-vertical">';
                 $str .= '<div class="title-vertical">'. $filter->getName() .'</div>';
             }
             // Récupération de toutes les séances
@@ -240,8 +247,9 @@ class CalendarBuilder
                     'seanceTitleClass' => 'seance-title'
                 ]);
             }
+                $str .= '</div>';
         }
-        $str .= '</div>';
+        $str .= '</div></div>';
         return $str;
     }
 

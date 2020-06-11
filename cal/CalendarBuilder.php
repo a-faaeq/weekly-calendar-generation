@@ -142,24 +142,18 @@ class CalendarBuilder
     {
         $period = $this->getPeriod();
         $str = '';
-        $first = false;
-
         foreach ($period as $date) {
-            $formatDate = new \DateTime($date);
-            $day = $formatDate->format('w');
+            $day = $date->format('w');
 
             if ($day === "1") {
-                if ($first === true) {
-                    $str .= '</div>';
-                }
                 $str .= $this->firstString();
                 $str .= $this->colHours();
                 $str .= $this->buildDay($date);
-                $first = true;
             } else if ($day !== "0" && $day !== "6"){
                 $str .= $this->buildDay($date);
+            } else if ($day === "6") {
+                $str .= '</div>';
             }
-
         }
         return $str;
     }

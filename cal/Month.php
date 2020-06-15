@@ -263,7 +263,10 @@ class Month {
                 $date = (clone $monday)->modify("+" . ($k + $i * 7) . " day");
 
                 if (intval($date->format('m')) !== $this->getMonth()) {
-                    $string .= '<td style="color: gray;">' . $date->format('d') . '</td>';
+                    $string .= '<td id="day_' . $date->format('Y')
+                        . '-' . $date->format('m')
+                        . '-' . $date->format('d')
+                        . '" class="minicalDay" style="color: gray;">' . $date->format('d') . '</td>';
                 } else {
                     $string .= '<td id="day_' . $date->format('Y')
                         . '-' . $date->format('m')

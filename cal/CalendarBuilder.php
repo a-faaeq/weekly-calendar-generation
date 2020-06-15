@@ -138,6 +138,15 @@ class CalendarBuilder
      * @return string
      * @throws \Exception
      */
+    public function dayCalendar() : string
+    {
+        return $this->buildDay($this->startDate);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function monthCalendar() : string
     {
         $period = $this->getPeriod();

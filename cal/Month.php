@@ -265,12 +265,15 @@ class Month {
                 if (intval($date->format('m')) !== $this->getMonth()) {
                     $string .= '<td style="color: gray;">' . $date->format('d') . '</td>';
                 } else {
-                    $string .= '<td id="day-' . $date->format('d') . '">' . $date->format('d') . '</td>';
+                    $string .= '<td id="day_' . $date->format('Y')
+                        . '-' . $date->format('m')
+                        . '-' . $date->format('d') . '" class="minicalDay">'
+                        . $date->format('d') . '</td>';
                 }
 
                 if ($k === 6) {
                     $cloneDate = clone($date->modify('+ 1 week'));
-                    $string .= '</tr><tr id="week-' . ($cloneDate->format('W')). '">';
+                    $string .= '</tr><tr id="week-' . ($cloneDate->format('W')). '" class="minicalWeek">';
                 }
             }
         }

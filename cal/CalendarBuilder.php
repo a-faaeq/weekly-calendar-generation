@@ -221,10 +221,11 @@ class CalendarBuilder
             $str .= '<div>';
         }
 
+        $filterNumber = count($this->getData());
         foreach ($this->getData() as $filter) {
 
             if ($this->orientation === 0) {
-                $str .= '<div>';
+                $str .= '<div style="width: '. 100/$filterNumber.'%">';
                 $str .= '<div class="title">'. $filter->getName() .'</div>';
             }
             if ($this->orientation === 1) {

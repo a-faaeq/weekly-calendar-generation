@@ -297,9 +297,6 @@ class CalendarBuilder
         return $this->colors;
     }
 
-    /**
-     * @param mixed $colors
-     */
     public function setColors(): void
     {
         $this->colors = (isset($this->getCssOptions()['colors'])) ? $this->getCssOptions()['colors'] : null;

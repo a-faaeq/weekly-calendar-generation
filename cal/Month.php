@@ -266,11 +266,12 @@ class Month {
                     $string .= '<td id="day_' . $date->format('Y')
                         . '-' . $date->format('m')
                         . '-' . $date->format('d')
-                        . '" class="minicalDay" style="color: gray;">' . $date->format('d') . '</td>';
+                        . '" class="minicalDay" style="color: gray;" onclick="minical()">'
+                        . $date->format('d') . '</td>';
                 } else {
                     $string .= '<td id="day_' . $date->format('Y')
                         . '-' . $date->format('m')
-                        . '-' . $date->format('d') . '" class="minicalDay">'
+                        . '-' . $date->format('d') . '" class="minicalDay" onclick="minical()">'
                         . $date->format('d') . '</td>';
                 }
 

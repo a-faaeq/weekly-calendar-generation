@@ -267,10 +267,10 @@ class Month {
                         . '-' . $date->format('d');
 
                 if (intval($date->format('m')) !== $this->getMonth()) {
-                    $string .= '<td id="'. $id .'" class="minicalDay" style="color: gray;" onclick="minical('.$id.')">'
+                    $string .= '<td id="'. $id .'" class="minicalDay" style="color: gray;" onclick="minical(\''.$id.'\')">'
                         . $date->format('d') . '</td>';
                 } else {
-                    $string .= '<td id="'.$id.'" class="minicalDay" onclick="minical('.$id.')">'
+                    $string .= '<td id="'.$id.'" class="minicalDay" onclick="minical(\''.$id.'\')">'
                         . $date->format('d') . '</td>';
                 }
 

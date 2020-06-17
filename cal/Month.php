@@ -262,16 +262,15 @@ class Month {
             foreach ($days as $k=>$day) {
                 $date = (clone $monday)->modify("+" . ($k + $i * 7) . " day");
 
-                if (intval($date->format('m')) !== $this->getMonth()) {
-                    $string .= '<td id="day_' . $date->format('Y')
+                $id = 'day_' . $date->format('Y')
                         . '-' . $date->format('m')
-                        . '-' . $date->format('d')
-                        . '" class="minicalDay" style="color: gray;" onclick="minical()">'
+                        . '-' . $date->format('d');
+
+                if (intval($date->format('m')) !== $this->getMonth()) {
+                    $string .= '<td id="'. $id .'" class="minicalDay" style="color: gray;" onclick="minical('.$id.')">'
                         . $date->format('d') . '</td>';
                 } else {
-                    $string .= '<td id="day_' . $date->format('Y')
-                        . '-' . $date->format('m')
-                        . '-' . $date->format('d') . '" class="minicalDay" onclick="minical()">'
+                    $string .= '<td id="'.$id.'" class="minicalDay" onclick="minical('.$id.')">'
                         . $date->format('d') . '</td>';
                 }
 
